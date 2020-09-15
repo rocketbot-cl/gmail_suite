@@ -52,24 +52,51 @@ module = GetParams("module")
 
 global gmail_suite
 
+def get_msg_attach(file):
+    import mimetypes
+    content_type, encoding = mimetypes.guess_type(file)
+
+    if content_type is None or encoding is not None:
+        content_type = 'application/octet-stream'
+
+    main_type, sub_type = content_type.split('/', 1)
+
+    if main_type == 'text':
+        fp = open(file, 'rb')
+        msg = MIMEText(fp.read().decode("utf-8"), _subtype=sub_type)
+        fp.close()
+    elif main_type == 'image':
+        fp = open(file, 'rb')
+        msg = MIMEImage(fp.read(), _subtype=sub_type)
+        fp.close()
+    elif main_type == 'audio':
+        fp = open(file, 'rb')
+        msg = MIMEAudio(fp.read(), _subtype=sub_type)
+        fp.close()
+    else:
+        fp = open(file, 'rb')
+        msg = MIMEBase(main_type, sub_type)
+        msg.set_payload(fp.read())
+        fp.close()
+    return msg
+
 
 def create_message(sender, to_, cc_, subject_, message_text, filenames_):
+    global get_msg_attach
     message = MIMEMultipart()
     message.attach(MIMEText(message_text, 'html'))
     message['to'] = to_
     message['cc'] = cc_
     message['from'] = sender
     message['subject'] = subject_
-    raw_message = base64.urlsafe_b64encode(message.as_string().encode("utf-8"))
+
     for file in filenames_:
         filename_ = os.path.basename(file)
-        attachment_ = open(file, "rb")
-        part_ = MIMEBase('application', 'octet-stream')
-        part_.set_payload(attachment_.read())
-        attachment_.close()
-        encoders.encode_base64(part_)
-        part_.add_header('Content-Disposition', "attachment; filename= %s" % filename_)
-        message.attach(part_)
+        msg_ = get_msg_attach(file)
+        msg_.add_header('Content-Disposition', 'attachment', filename=filename_)
+        message.attach(msg_)
+
+    raw_message = base64.urlsafe_b64encode(message.as_string().encode("utf-8"))
     return {
         'raw': raw_message.decode("utf-8")
     }
@@ -147,17 +174,16 @@ if module == "send_mail":
     filenames = [attached_file] if attached_file else []
 
     try:
-
-        filenames = []
         if files:
             for f in os.listdir(files):
                 f = os.path.join(files, f)
                 print(f)
                 filenames.append(f)
-
+        print(filenames)
         service = build('gmail', 'v1', credentials=gmail_suite.credentials)
-        message = create_message(gmail_suite.user_id, to, cc, subject, body_, filenames)
-        sent = service.users().messages().send(userId='me', body=message).execute()
+        msg = create_message(gmail_suite.user_id, to, cc, subject, body_, filenames)
+        sent = service.users().messages().send(userId='me', body=msg).execute()
+        print(sent)
         print('Message Id: %s' % sent['id'])
 
     except Exception as e:
