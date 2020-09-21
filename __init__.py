@@ -82,7 +82,7 @@ def get_msg_attach(file):
 
 
 def create_message(sender, to_, cc_, subject_, message_text, filenames_):
-    global get_msg_attach, MIMEMultipart
+    global get_msg_attach, MIMEMultipart, MIMEText, base64
     message = MIMEMultipart()
     message.attach(MIMEText(message_text, 'html'))
     message['to'] = to_
