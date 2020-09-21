@@ -153,7 +153,7 @@ if module == "conf_mail":
 
     try:
         path = GetParams("path")
-        var_ = GetParams("result")
+        var_ = GetParams("var_")
         email = GetParams("from")
 
         gmail_suite = GmailSuite(path, email)
