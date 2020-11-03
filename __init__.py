@@ -28,7 +28,6 @@ import base64
 from bs4 import BeautifulSoup
 import email
 from email import encoders
-from email.mime.base import MIMEBase
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.utils import make_msgid
@@ -52,13 +51,18 @@ module = GetParams("module")
 
 global gmail_suite
 
+
 def get_msg_attach(file):
     import mimetypes
+    from email.mime.base import MIMEBase
+    from email.mime.nonmultipart import MIMENonMultipart
     content_type, encoding = mimetypes.guess_type(file)
 
     if content_type is None or encoding is not None:
         content_type = 'application/octet-stream'
 
+    # print("content_type", content_type)
+    # exit()
     main_type, sub_type = content_type.split('/', 1)
 
     if main_type == 'text':
@@ -77,6 +81,7 @@ def get_msg_attach(file):
         fp = open(file, 'rb')
         msg = MIMEBase(main_type, sub_type)
         msg.set_payload(fp.read())
+        encoders.encode_base64(msg)
         fp.close()
     return msg
 
@@ -92,11 +97,13 @@ def create_message(sender, to_, cc_, subject_, message_text, filenames_):
 
     for file in filenames_:
         filename_ = os.path.basename(file)
+
         msg_ = get_msg_attach(file)
-        msg_.add_header('Content-Disposition', 'attachment', filename=filename_)
+        msg_.add_header('Content-Disposition', 'attachment', filename=os.path.basename(filename_))
+
         message.attach(msg_)
 
-    raw_message = base64.urlsafe_b64encode(message.as_string().encode("utf-8"))
+    raw_message = base64.urlsafe_b64encode(message.as_bytes())
     return {
         'raw': raw_message.decode("utf-8")
     }
