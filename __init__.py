@@ -56,6 +56,7 @@ def get_msg_attach(file):
     import mimetypes
     from email.mime.base import MIMEBase
     from email.mime.nonmultipart import MIMENonMultipart
+    from email import encoders
     content_type, encoding = mimetypes.guess_type(file)
 
     if content_type is None or encoding is not None:
