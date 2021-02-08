@@ -13,6 +13,8 @@ Module to manage gmail. This module replace gmail_ module, because gmail_ module
     <li>Move email to label</li>
     <li>Mark email as unread</li>
     <li>Close Server</li>
+    <li>List all labels</li>
+    
 </ul>
 
 **In the example robot you must change the URL and credentials for yours.
