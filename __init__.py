@@ -202,12 +202,10 @@ if module == "send_mail":
 if module == "get_mail":
     filter_ = GetParams('filtro')
     var_ = GetParams('var_')
-
+    label_id = GetParams('label_id')
     try:
         service = build('gmail', 'v1', credentials=gmail_suite.credentials)
-
-        mails = service.users().messages().list(userId='me', q=filter_).execute()
-
+        mails = service.users().messages().list(userId='me', q=filter_, labelIds=label_id).execute()
         if "messages" in mails:
             list_ = [mail["id"] for mail in mails["messages"]]
         else:
@@ -421,3 +419,17 @@ if module == "markAsUnread":
 
 if module == "close":
     gmail_suite = None
+
+if module == "listLabels":
+    var_ = GetParams('var_')
+    try:
+        service = build('gmail', 'v1', credentials=gmail_suite.credentials)
+        labels = service.users().labels().list(userId='me').execute()
+        label_id_list = []
+        for label in labels['labels']:
+            label_id_list.append(label['id'])
+        SetVar(var_, label_id_list)
+    except Exception as e:
+        print("\x1B[" + "31;40mAn error occurred\u2193\x1B[" + "0m")
+        PrintException()
+        raise e
