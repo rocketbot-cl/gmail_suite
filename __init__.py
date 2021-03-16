@@ -87,12 +87,13 @@ def get_msg_attach(file):
     return msg
 
 
-def create_message(sender, to_, cc_, subject_, message_text, filenames_):
+def create_message(sender, to_, cc_, bcc_, subject_, message_text, filenames_):
     global get_msg_attach, MIMEMultipart, MIMEText, base64
     message = MIMEMultipart()
     message.attach(MIMEText(message_text, 'html'))
     message['to'] = to_
     message['cc'] = cc_
+    message['bcc'] = bcc_
     message['from'] = sender
     message['subject'] = subject_
 
@@ -177,6 +178,7 @@ if module == "send_mail":
     subject = GetParams('subject')
     body_ = GetParams('body')
     cc = GetParams('cc')
+    bcc = GetParams('bcc')
     attached_file = GetParams('attached_file')
     files = GetParams('attached_folder')
     filenames = [attached_file] if attached_file else []
@@ -189,7 +191,7 @@ if module == "send_mail":
                 filenames.append(f)
         print(filenames)
         service = build('gmail', 'v1', credentials=gmail_suite.credentials)
-        msg = create_message(gmail_suite.user_id, to, cc, subject, body_, filenames)
+        msg = create_message(gmail_suite.user_id, to, cc, bcc, subject, body_, filenames)
         sent = service.users().messages().send(userId='me', body=msg).execute()
         print(sent)
         print('Message Id: %s' % sent['id'])
