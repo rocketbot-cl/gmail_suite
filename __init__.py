@@ -195,7 +195,7 @@ if module == "send_mail":
         print('Message Id: %s' % sent['id'])
 
     except Exception as e:
-        print("\x1B[" + "31;40mAn error occurred\u2193\x1B[" + "0m")
+        print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
         PrintException()
         raise e
 
@@ -213,7 +213,7 @@ if module == "get_mail":
 
         SetVar(var_, list_)
     except Exception as e:
-        print("\x1B[" + "31;40mAn error occurred\u2193\x1B[" + "0m")
+        print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
         PrintException()
         raise e
 
@@ -233,7 +233,7 @@ if module == "get_unread":
 
         SetVar(var_, list_)
     except Exception as e:
-        print("\x1B[" + "31;40mAn error occurred\u2193\x1B[" + "0m")
+        print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
         PrintException()
         raise e
 
@@ -289,7 +289,7 @@ if module == "read_mail":
 
         SetVar(var_, final)
     except Exception as e:
-        print("\x1B[" + "31;40mAn error occurred\u2193\x1B[" + "0m")
+        print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
         PrintException()
         raise e
 
@@ -356,7 +356,7 @@ if module == "create_folder":
         mails = service.users().labels().create(userId='me', body=body).execute()
 
     except Exception as e:
-        print("\x1B[" + "31;40mAn error occurred\u2193\x1B[" + "0m")
+        print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
         PrintException()
         raise e
 
@@ -397,7 +397,7 @@ if module == "move_mail":
             SetVar(var, False)
 
     except Exception as e:
-        print("\x1B[" + "31;40mAn error occurred\u2193\x1B[" + "0m")
+        print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
         PrintException()
         SetVar(var, False)
         raise e
@@ -430,6 +430,6 @@ if module == "listLabels":
             label_id_list.append(label['id'])
         SetVar(var_, label_id_list)
     except Exception as e:
-        print("\x1B[" + "31;40mAn error occurred\u2193\x1B[" + "0m")
+        print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
         PrintException()
         raise e
