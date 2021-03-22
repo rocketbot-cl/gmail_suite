@@ -281,7 +281,7 @@ if module == "read_mail":
             bs = "\n".join(html_list)
 
         # bs = BeautifulSoup(mail_.body, 'html.parser').body.get_text()
-        links = [{a.get_text(): a["href"] for a in bs_mail.find_all("a")}]
+        links = [{a.get_text(): a["href"] for a in bs_mail.find_all("a") if "href" in a}]
 
         final = {"date": mail_.date.__str__(), 'subject': mail_.subject,
                  'from': ", ".join([b for (a, b) in mail_.from_]),
