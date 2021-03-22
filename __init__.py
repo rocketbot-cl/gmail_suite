@@ -187,13 +187,13 @@ if module == "send_mail":
         if files:
             for f in os.listdir(files):
                 f = os.path.join(files, f)
-                print(f)
+
                 filenames.append(f)
-        print(filenames)
+
         service = build('gmail', 'v1', credentials=gmail_suite.credentials)
         msg = create_message(gmail_suite.user_id, to, cc, bcc, subject, body_, filenames)
         sent = service.users().messages().send(userId='me', body=msg).execute()
-        print(sent)
+
         print('Message Id: %s' % sent['id'])
 
     except Exception as e:
@@ -225,7 +225,7 @@ if module == "get_unread":
 
     try:
         service = build('gmail', 'v1', credentials=gmail_suite.credentials)
-        filter_ = "label:unread" + str(filter_) if filter_ else "label:unread"
+        filter_ = "label:unread " + str(filter_) if filter_ else "label:unread"
         mails = service.users().messages().list(userId='me', q=filter_).execute()
 
         if "messages" in mails:
@@ -247,7 +247,7 @@ if module == "read_mail":
     try:
 
         service = build('gmail', 'v1', credentials=gmail_suite.credentials)
-        message = service.users().messages().get(userId='me', id=id_, format='metadata').execute()
+        message = service.users().messages().get(userId='me', id=id_, format='full').execute()
         mime_message = service.users().messages().get(userId='me', id=id_, format='raw').execute()
         msg_str = base64.urlsafe_b64decode(mime_message['raw'].encode("utf-8")).decode("utf-8")
         mail_ = mailparser.parse_from_string(msg_str)
@@ -260,6 +260,8 @@ if module == "read_mail":
                                                                               userId='me', messageId=id_).execute()
 
                     file_data = base64.urlsafe_b64decode(attachment['data'].encode('utf-8'))
+                    if not att_folder.endswith("/"):
+                        att_folder += "/"
                     path = ''.join([att_folder, part['filename']])
 
                     with open(path, 'wb') as f:
@@ -272,7 +274,6 @@ if module == "read_mail":
         except:
             bs = mail_.body
 
-
         if "--- mail_boundary ---" in bs.__str__():
             html_list = bs.split("--- mail_boundary ---")
             html = BeautifulSoup(html_list[1], 'html.parser').get_text()
@@ -283,7 +284,6 @@ if module == "read_mail":
         # bs = BeautifulSoup(mail_.body, 'html.parser').body.get_text()
         links = [{a.get_text(): a["href"] for a in bs_mail.find_all("a")}]
 
-        print(mail_, dir(mail_))
         final = {"date": mail_.date.__str__(), 'subject': mail_.subject,
                  'from': ", ".join([b for (a, b) in mail_.from_]),
                  'to': ", ".join([b for (a, b) in mail_.to]), 'cc': ", ".join([b for (a, b) in mail_.cc]), 'body': bs,
@@ -387,7 +387,7 @@ if module == "move_mail":
                 break
 
         # Create body, add label and remove from inbox
-        print(label)
+
         if label is not None:
             body = {
                 "addLabelIds": [label["id"]],
@@ -414,7 +414,7 @@ if module == "markAsUnread":
         }
         service = build('gmail', 'v1', credentials=gmail_suite.credentials)
         message = service.users().messages().modify(userId='me', id=id_, body=body).execute()
-        print(message)
+
     except Exception as e:
         PrintException()
         raise e
