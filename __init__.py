@@ -280,7 +280,6 @@ if module == "read_mail":
             html_list[1] = html
             bs = "\n".join(html_list)
 
-
         # bs = BeautifulSoup(mail_.body, 'html.parser').body.get_text()
         links = [{a.get_text(): a["href"] for a in bs_mail.find_all("a")}]
 
@@ -290,6 +289,11 @@ if module == "read_mail":
                  'files': nameFile, 'links': links}
 
         SetVar(var_, final)
+        body = {
+            "removeLabelIds": ['UNREAD']
+        }
+
+        message = service.users().messages().modify(userId='me', id=id_, body=body).execute()
     except Exception as e:
         print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
         PrintException()
