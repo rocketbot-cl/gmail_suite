@@ -50,13 +50,14 @@ from google.auth.transport.requests import Request
 module = GetParams("module")
 
 global get_credentials, mod_gmail_suite_sessions
-SESSION_DEFAULT = "gmail.pickle"
+SESSION_DEFAULT = "gmail"
 # Initialize settings for the module here
 try:
     if not mod_gmail_suite_sessions:
         mod_gmail_suite_sessions = {SESSION_DEFAULT: {}}
 except NameError:
     mod_gmail_suite_sessions = {SESSION_DEFAULT: {}}
+
 
 def get_msg_attach(file):
     import mimetypes
@@ -291,7 +292,7 @@ if module == "read_mail":
 
         if "parts" in message['payload']:
             for part in message['payload']['parts']:
-                if part['filename'] and part['body'] and part['body']['attachmentId']:
+                if part['filename'] and part['body'] and part['body']['attachmentId'] and att_folder:
                     attachment = service.users().messages().attachments().get(id=part['body']['attachmentId'],
                                                                               userId='me', messageId=id_).execute()
 
