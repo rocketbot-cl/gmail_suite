@@ -49,8 +49,14 @@ from google.auth.transport.requests import Request
 
 module = GetParams("module")
 
-global gmail_suite
-
+global get_credentials, mod_gmail_suite_sessions
+SESSION_DEFAULT = "gmail.pickle"
+# Initialize settings for the module here
+try:
+    if not mod_gmail_suite_sessions:
+        mod_gmail_suite_sessions = {SESSION_DEFAULT: {}}
+except NameError:
+    mod_gmail_suite_sessions = {SESSION_DEFAULT: {}}
 
 def get_msg_attach(file):
     import mimetypes
@@ -118,16 +124,23 @@ class GmailSuite:
     SCOPES = ['https://mail.google.com/', 'https://www.googleapis.com/auth/gmail.send',
               'https://www.googleapis.com/auth/gmail.readonly']
 
-    def __init__(self, credentials_path, user_id):
-        self.credentials = credentials_path
+    def __init__(self, credentials_path, user_id, session):
+        self.credentials = self.set_credentials(credentials_path, session)
         self.user_id = user_id
 
-    @property
-    def credentials(self):
-        return self._credentials
+    #@property
+    def get_credentials(self, session):
+        creds = None
+        session_pickle = session + ".pickle"
+        if os.path.exists(session_pickle):
+            with open(session_pickle, 'rb') as token:
+                creds = pickle.load(token)
+        self._credentials = creds
+        return creds
+        #return self._credentials
 
-    @credentials.setter
-    def credentials(self, credentials_path):
+    #@credentials.setter
+    def set_credentials(self, credentials_path, session):
 
         try:
             """Shows basic usage of the Gmail API.
@@ -137,8 +150,9 @@ class GmailSuite:
             # The file token.pickle stores the user's access and refresh tokens, and is
             # created automatically when the authorization flow completes for the first
             # time.
-            if os.path.exists('gmail.pickle'):
-                with open('gmail.pickle', 'rb') as token:
+            session_pickle = session + ".pickle"
+            if os.path.exists(session_pickle):
+                with open(session_pickle, 'rb') as token:
                     creds = pickle.load(token)
             # If there are no (valid) credentials available, let the user log in.
             if not creds or not creds.valid:
@@ -149,7 +163,7 @@ class GmailSuite:
                         credentials_path, self.SCOPES)
                     creds = flow.run_local_server(port=0)
                 # Save the credentials for the next run
-                with open('gmail.pickle', 'wb') as token:
+                with open(session_pickle, 'wb') as token:
                     pickle.dump(creds, token)
 
             self._credentials = creds
@@ -164,8 +178,16 @@ if module == "conf_mail":
         path = GetParams("path")
         var_ = GetParams("var_")
         email = GetParams("from")
-
-        gmail_suite = GmailSuite(path, email)
+        session = GetParams("session")
+        if not session:
+            session = SESSION_DEFAULT
+        print(session)
+        gmail_suite = GmailSuite(path, email, session)
+        service = build('gmail', 'v1', credentials=gmail_suite.get_credentials(session))
+        mod_gmail_suite_sessions[session] = {
+                "service": service,
+                "gmail": gmail_suite
+        }
         SetVar(var_, True)
     except Exception as e:
         PrintException()
@@ -181,6 +203,11 @@ if module == "send_mail":
     bcc = GetParams('bcc')
     attached_file = GetParams('attached_file')
     files = GetParams('attached_folder')
+    session = GetParams("session")
+    if not session:
+            session = SESSION_DEFAULT
+    service = mod_gmail_suite_sessions[session]["service"]
+    gmail_suite = mod_gmail_suite_sessions[session]["gmail"]
     filenames = [attached_file] if attached_file else []
 
     try:
@@ -190,7 +217,6 @@ if module == "send_mail":
 
                 filenames.append(f)
 
-        service = build('gmail', 'v1', credentials=gmail_suite.credentials)
         msg = create_message(gmail_suite.user_id, to, cc, bcc, subject, body_, filenames)
         sent = service.users().messages().send(userId='me', body=msg).execute()
 
@@ -205,8 +231,13 @@ if module == "get_mail":
     filter_ = GetParams('filtro')
     var_ = GetParams('var_')
     label_id = GetParams('label_id')
+    session = GetParams("session")
+    if not session:
+            session = SESSION_DEFAULT
+    service = mod_gmail_suite_sessions[session]["service"]
+    gmail_suite = mod_gmail_suite_sessions[session]["gmail"]
     try:
-        service = build('gmail', 'v1', credentials=gmail_suite.credentials)
+        #service = build('gmail', 'v1', credentials=gmail_suite.credentials)
         mails = service.users().messages().list(userId='me', q=filter_, labelIds=label_id).execute()
         if "messages" in mails:
             list_ = [mail["id"] for mail in mails["messages"]]
@@ -222,9 +253,11 @@ if module == "get_mail":
 if module == "get_unread":
     filter_ = GetParams('filtro')
     var_ = GetParams('var_')
-
+    session = GetParams("session")
+    if not session:
+            session = SESSION_DEFAULT
     try:
-        service = build('gmail', 'v1', credentials=gmail_suite.credentials)
+        service = mod_gmail_suite_sessions[session]["service"]
         filter_ = "label:unread " + str(filter_) if filter_ else "label:unread"
         mails = service.users().messages().list(userId='me', q=filter_).execute()
 
@@ -243,10 +276,13 @@ if module == "read_mail":
     id_ = GetParams('id_')
     var_ = GetParams('var_')
     att_folder = GetParams('att_folder')
-
+    session = GetParams("session")
+    if not session:
+            session = SESSION_DEFAULT
+    service = mod_gmail_suite_sessions[session]["service"]
+    gmail_suite = mod_gmail_suite_sessions[session]["gmail"]
     try:
 
-        service = build('gmail', 'v1', credentials=gmail_suite.credentials)
         message = service.users().messages().get(userId='me', id=id_, format='full').execute()
         mime_message = service.users().messages().get(userId='me', id=id_, format='raw').execute()
         msg_str = base64.urlsafe_b64decode(mime_message['raw'].encode("utf-8")).decode("utf-8")
@@ -352,7 +388,11 @@ if module == "read_mail":
 if module == "create_folder":
     try:
         folder_name = GetParams('folder_name')
-        service = build('gmail', 'v1', credentials=gmail_suite.credentials)
+        session = GetParams("session")
+        if not session:
+            session = SESSION_DEFAULT
+        service = mod_gmail_suite_sessions[session]["service"]
+        gmail_suite = mod_gmail_suite_sessions[session]["gmail"]
         body = {
             "labelListVisibility": 'labelShow',
             "messageListVisibility": 'show',
@@ -371,7 +411,11 @@ if module == "move_mail":
     id_ = GetParams("id_")
     label_ = GetParams("label_")
     var = GetParams("var")
-
+    session = GetParams("session")
+    if not session:
+            session = SESSION_DEFAULT
+    service = mod_gmail_suite_sessions[session]["service"]
+    gmail_suite = mod_gmail_suite_sessions[session]["gmail"]
     if not id_:
         raise Exception("No ha ingresado ID de email a mover")
     if not label_:
@@ -379,7 +423,7 @@ if module == "move_mail":
 
     try:
         # Create gmail service
-        service = build('gmail', 'v1', credentials=gmail_suite.credentials)
+        #service = build('gmail', 'v1', credentials=gmail_suite.credentials)
 
         # Get all labels and filter by name
         labels = service.users().labels().list(userId='me').execute()["labels"]
@@ -411,12 +455,16 @@ if module == "move_mail":
 if module == "markAsUnread":
     id_ = GetParams("id_")
     var = GetParams("var")
-
+    session = GetParams("session")
+    if not session:
+            session = SESSION_DEFAULT
+    service = mod_gmail_suite_sessions[session]["service"]
+    gmail_suite = mod_gmail_suite_sessions[session]["gmail"]
     try:
         body = {
             "addLabelIds": ['UNREAD']
         }
-        service = build('gmail', 'v1', credentials=gmail_suite.credentials)
+        #service = build('gmail', 'v1', credentials=gmail_suite.credentials)
         message = service.users().messages().modify(userId='me', id=id_, body=body).execute()
 
     except Exception as e:
@@ -424,12 +472,22 @@ if module == "markAsUnread":
         raise e
 
 if module == "close":
-    gmail_suite = None
+    session = GetParams("session")
+    if not session:
+            session = SESSION_DEFAULT
+    mod_gmail_suite_sessions[session]["service"] = None
+    mod_gmail_suite_sessions[session]["gmail"] = None
+
 
 if module == "listLabels":
     var_ = GetParams('var_')
     try:
-        service = build('gmail', 'v1', credentials=gmail_suite.credentials)
+        session = GetParams("session")
+        if not session:
+            session = SESSION_DEFAULT
+        service = mod_gmail_suite_sessions[session]["service"]
+        gmail_suite = mod_gmail_suite_sessions[session]["gmail"]
+        #service = build('gmail', 'v1', credentials=gmail_suite.credentials)
         labels = service.users().labels().list(userId='me').execute()
         label_id_list = []
         for label in labels['labels']:
