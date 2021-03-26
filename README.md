@@ -24,6 +24,9 @@ Module to manage gmail. This module replace gmail_ module, because gmail_ module
 
 ![alt text](https://raw.githubusercontent.com/rocketbot-cl/Gmail/master/example/gmail.png)
 
+## Updates
+### 26-Mar-2021
+- Session: You can have many sessions for access to more emails.
 
 <h2>Dependencies</h2>
 
