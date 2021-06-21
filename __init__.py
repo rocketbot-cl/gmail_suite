@@ -34,7 +34,8 @@ from email.utils import make_msgid
 
 base_path = tmp_global_obj["basepath"]
 cur_path = base_path + 'modules' + os.sep + 'gmail_suite' + os.sep + 'libs' + os.sep
-sys.path.append(cur_path)
+if cur_path not in sys.path:
+    sys.path.append(cur_path)
 
 from mailparser import mailparser
 import pickle
@@ -233,6 +234,7 @@ if module == "get_mail":
     var_ = GetParams('var_')
     label_id = GetParams('label_id')
     session = GetParams("session")
+    order_by = GetParams("order_by")
     if not session:
             session = SESSION_DEFAULT
     service = mod_gmail_suite_sessions[session]["service"]
@@ -240,10 +242,13 @@ if module == "get_mail":
     try:
         #service = build('gmail', 'v1', credentials=gmail_suite.credentials)
         mails = service.users().messages().list(userId='me', q=filter_, labelIds=label_id).execute()
+        
+        list_ = []
         if "messages" in mails:
             list_ = [mail["id"] for mail in mails["messages"]]
-        else:
-            list_ = []
+        
+        if order_by == "old":
+            list_ = list_[::-1]
 
         SetVar(var_, list_)
     except Exception as e:
@@ -255,6 +260,8 @@ if module == "get_unread":
     filter_ = GetParams('filtro')
     var_ = GetParams('var_')
     session = GetParams("session")
+    order_by = GetParams("order_by")
+    
     if not session:
             session = SESSION_DEFAULT
     try:
@@ -262,10 +269,12 @@ if module == "get_unread":
         filter_ = "label:unread " + str(filter_) if filter_ else "label:unread"
         mails = service.users().messages().list(userId='me', q=filter_).execute()
 
+        list_ = []
         if "messages" in mails:
             list_ = [mail["id"] for mail in mails["messages"]]
-        else:
-            list_ = []
+
+        if order_by == "old":
+            list_ = list_[::-1]
 
         SetVar(var_, list_)
     except Exception as e:

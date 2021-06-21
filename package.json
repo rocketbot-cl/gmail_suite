@@ -317,6 +317,28 @@
             "css": "col-md-6"
           },
           {
+            "type": "select",
+            "placeholder": {
+            },
+            "title": {
+              "es": "Ordenar por",
+              "en": "Order by",
+              "pr": "Ordenar por"
+            },
+            "options": [
+              {
+                "title": "New first",
+                "value": "new"
+              },
+              {
+                "title": "Old first",
+                "value": "old"
+              }
+            ],
+            "id": "order_by",
+            "css": "col-md-6"
+          },
+          {
             "type": "input",
             "placeholder": "Variable",
             "title": {
@@ -394,6 +416,28 @@
               "cn": "Session:"
             },
             "id": "session",
+            "css": "col-md-6"
+          },
+          {
+            "type": "select",
+            "placeholder": {
+            },
+            "title": {
+              "es": "Ordenar por",
+              "en": "Order by",
+              "pr": "Ordenar por"
+            },
+            "options": [
+              {
+                "title": "New first",
+                "value": "new"
+              },
+              {
+                "title": "Old first",
+                "value": "old"
+              }
+            ],
+            "id": "order_by",
             "css": "col-md-6"
           },
           {
