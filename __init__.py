@@ -312,6 +312,8 @@ if module == "read_mail":
 
                     with open(path, 'wb') as f:
                         f.write(file_data)
+                    
+                    nameFile.append(part['filename'])
 
         bs = ""
         bs_mail = BeautifulSoup(mail_.body, 'html.parser')
