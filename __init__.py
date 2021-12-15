@@ -257,10 +257,14 @@ if module == "get_mail":
         raise e
 
 if module == "forward":
-    id_ = '17d9f1b190f48c5e'
-    #var_ = GetParams('var_')
-    att_folder = ''
-    session = 'nicolas'
+    id_ = GetParams('id_mail')
+    var_ = GetParams('var_')
+    att_folder = GetParams('att_folder')
+    session = GetParams('session')
+    to = GetParams('to')
+    cc = GetParams('cc')
+    bcc = GetParams('bcc')
+    subject = GetParams('subject')
 
     if not session:
             session = SESSION_DEFAULT

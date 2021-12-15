@@ -889,7 +889,7 @@
               "es": "ID Mail:",
               "en": "ID Mail:"
             },
-            "id": "bcc",
+            "id": "id_mail",
             "css": "col-md-12"
           },
           {
