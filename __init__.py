@@ -237,9 +237,9 @@ if module == "get_mail":
     order_by = GetParams("order_by")
     if not session:
             session = SESSION_DEFAULT
-    service = mod_gmail_suite_sessions[session]["service"]
-    gmail_suite = mod_gmail_suite_sessions[session]["gmail"]
     try:
+        service = mod_gmail_suite_sessions[session]["service"]
+        gmail_suite = mod_gmail_suite_sessions[session]["gmail"]
         #service = build('gmail', 'v1', credentials=gmail_suite.credentials)
         mails = service.users().messages().list(userId='me', q=filter_, labelIds=label_id).execute()
         
@@ -255,6 +255,80 @@ if module == "get_mail":
         print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
         PrintException()
         raise e
+
+if module == "forward":
+    id_ = '17d9f1b190f48c5e'
+    #var_ = GetParams('var_')
+    att_folder = ''
+    session = 'nicolas'
+
+    if not session:
+            session = SESSION_DEFAULT
+    service = mod_gmail_suite_sessions[session]["service"]
+    gmail_suite = mod_gmail_suite_sessions[session]["gmail"]
+    try:
+
+        message = service.users().messages().get(userId='me', id=id_, format='full').execute()
+        mime_message = service.users().messages().get(userId='me', id=id_, format='raw').execute()
+        msg_str = base64.urlsafe_b64decode(mime_message['raw'].encode("utf-8")).decode("utf-8")
+        mail_ = mailparser.parse_from_string(msg_str)
+        nameFile = []
+
+        if "parts" in message['payload']:
+            for part in message['payload']['parts']:
+                if part['filename'] and part['body'] and part['body']['attachmentId'] and att_folder:
+                    attachment = service.users().messages().attachments().get(id=part['body']['attachmentId'],
+                                                                              userId='me', messageId=id_).execute()
+
+                    file_data = base64.urlsafe_b64decode(attachment['data'].encode('utf-8'))
+                    if not att_folder.endswith("/"):
+                        att_folder += "/"
+                    path = ''.join([att_folder, part['filename']])
+
+                    with open(path, 'wb') as f:
+                        f.write(file_data)
+
+        bs = ""
+        bs_mail = BeautifulSoup(mail_.body, 'html.parser')
+        try:
+            bs = bs_mail.body.get_text()
+        except:
+            bs = mail_.body
+        bs = bs_mail.body
+        if "--- mail_boundary ---" in bs.__str__():
+            html_list = bs.split("--- mail_boundary ---")
+            html = BeautifulSoup(html_list[1], 'html.parser').get_text()
+            html_list[1] = html
+            bs = "\n".join(html_list)
+
+        links = [{a.get_text(): a["href"] for a in bs_mail.find_all("a") if "href" in a}]
+
+        final = {"date": mail_.date.__str__(), 'subject': mail_.subject,
+                 'from': ", ".join([b for (a, b) in mail_.from_]),
+                 'to': ", ".join([b for (a, b) in mail_.to]), 'cc': ", ".join([b for (a, b) in mail_.cc]), 'body': bs,
+                 'files': nameFile, 'links': links}
+
+        print("final", final)
+        body = {
+            "removeLabelIds": ['UNREAD']
+        }
+
+        message = service.users().messages().modify(userId='me', id=id_, body=body).execute()
+
+        filenames = []
+        to = 'nick.sfra.7@gmail.com'
+        cc=''
+        bcc=''
+        subject=''
+        msg = create_message(gmail_suite.user_id, to, cc, bcc, subject, bs, filenames)
+        sent = service.users().messages().send(userId='me', body=msg).execute()
+
+        print('Message Id: %s' % sent['id'])
+    except Exception as e:
+        print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
+        PrintException()
+        raise e
+
 
 if module == "get_unread":
     filter_ = GetParams('filtro')
@@ -345,55 +419,6 @@ if module == "read_mail":
         PrintException()
         raise e
 
-# if module == "reply_email":
-#     id_ = GetParams('id_')
-#     body_ = GetParams('body')
-#     attached_file = GetParams('attached_file')
-#     # print(body_, attached_file)
-#
-#     try:
-#         mail = imaplib.IMAP4_SSL('imap.gmail.com')
-#         mail.login(fromaddr, password)
-#         mail.select("inbox")
-#         server = smtplib.SMTP('smtp.gmail.com', 587)
-#         server.starttls()
-#         server.login(fromaddr, password)
-#
-#         # mail.select()
-#         typ, data = mail.fetch(id_, '(RFC822)')
-#         raw_email = data[0][1]
-#         mm = email.message_from_bytes(raw_email)
-#
-#         # msg = MIMEMultipart()
-#         # msg.attach(MIMEText(body_, 'plain'))
-#
-#         #    m_ = create_auto_reply(mm, body_)
-#         mail__ = MIMEMultipart()
-#         mail__['Message-ID'] = make_msgid()
-#         mail__['References'] = mail__['In-Reply-To'] = mm['Message-ID']
-#         mail__['Subject'] = 'Re: ' + mm['Subject']
-#         mail__['From'] = mm['To'] = mm['Reply-To'] or mm['From']
-#         mail__.attach(MIMEText(dedent(body_), 'html'))
-#
-#         if attached_file:
-#             if os.path.exists(attached_file):
-#                 filename = os.path.basename(attached_file)
-#                 attachment = open(attached_file, "rb")
-#                 part = MIMEBase('application', 'octet-stream')
-#                 part.set_payload((attachment).read())
-#                 attachment.close()
-#                 encoders.encode_base64(part)
-#                 part.add_header('Content-Disposition', "attachment; filename= %s" % filename)
-#                 mail__.attach(part)
-#
-#         # print("FROMADDR",fromaddr, "FROM",mm['From'], "TO:",mm['To'])
-#         server.sendmail(fromaddr, mm['From'], mail__.as_bytes())
-#         # server.sendmail(fromaddr, mm['To'], mail__.as_bytes())
-#         # server.close()
-#         mail.logout()
-#     except Exception as e:
-#         PrintException()
-#         raise e
 
 if module == "create_folder":
     try:
