@@ -539,3 +539,35 @@ if module == "listLabels":
         print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
         PrintException()
         raise e
+
+if module == "get_attachments":
+    id_ = GetParams('id_')
+    att_folder = GetParams('att_folder')
+    session = GetParams("session")
+    if not session:
+            session = SESSION_DEFAULT
+    service = mod_gmail_suite_sessions[session]["service"]
+    gmail_suite = mod_gmail_suite_sessions[session]["gmail"]
+    try:
+        message = service.users().messages().get(userId='me', id=id_, format='full').execute()
+        mime_message = service.users().messages().get(userId='me', id=id_, format='raw').execute()
+        msg_str = base64.urlsafe_b64decode(mime_message['raw'].encode("utf-8")).decode("utf-8")
+        mail_ = mailparser.parse_from_string(msg_str)
+        nameFile = []
+        if "parts" in message['payload']:
+            for part in message['payload']['parts']:
+                if part['filename'] and part['body'] and part['body']['attachmentId'] and att_folder:
+                    attachment = service.users().messages().attachments().get(id=part['body']['attachmentId'],
+                                                                              userId='me', messageId=id_).execute()
+
+                    file_data = base64.urlsafe_b64decode(attachment['data'].encode('utf-8'))
+                    if not att_folder.endswith("/"):
+                        att_folder += "/"
+                    path = ''.join([att_folder, part['filename']])
+
+                    with open(path, 'wb') as f:
+                        f.write(file_data)
+    except Exception as e:
+        print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
+        PrintException()
+        raise e
