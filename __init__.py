@@ -341,15 +341,19 @@ if module == "get_unread":
     filter_ = GetParams('filtro')
     var_ = GetParams('var_')
     session = GetParams("session")
+    folder = GetParams("folder")
     order_by = GetParams("order_by")
     
+    if not folder:
+            folder = "inbox"
+            
     if not session:
             session = SESSION_DEFAULT
     try:
         service = mod_gmail_suite_sessions[session]["service"]
-        filter_ = "label:unread " + str(filter_) if filter_ else "label:unread"
+        filter_ = "label:unread " + str(filter_) + f" in:{folder}" if filter_ else f"label:unread in:{folder}" 
         mails = service.users().messages().list(userId='me', q=filter_).execute()
-
+        
         list_ = []
         if "messages" in mails:
             list_ = [mail["id"] for mail in mails["messages"]]
@@ -496,7 +500,7 @@ if module == "move_mail":
 
 if module == "markAsUnread":
     id_ = GetParams("id_")
-    var = GetParams("var")
+    var = GetParams("var")  
     session = GetParams("session")
     if not session:
             session = SESSION_DEFAULT
@@ -512,7 +516,7 @@ if module == "markAsUnread":
     except Exception as e:
         PrintException()
         raise e
-
+            
 if module == "close":
     session = GetParams("session")
     if not session:
