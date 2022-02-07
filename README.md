@@ -6,16 +6,11 @@
   
 Módulo para realizar acciones en Gmail  
 
-<<<<<<< HEAD
 ## How to install this module
-=======
-## Howto install this module
->>>>>>> ca598f40082c3bc50adabd7393e141dba499d8f6
   
 __Download__ and __install__ the content in 'modules' folder in Rocketbot path  
 
 
-<<<<<<< HEAD
 # Como usar este modulo
 Para trabajar con este modulo es necesario activar la API de gmail. Para esto, debes seguir los 
 siguientes pasos.
@@ -104,11 +99,6 @@ confirmar cada semana, puedes publicar la aplicación para que google la apruebe
 
 ## Overview
 
-=======
-
-## Overview
-
->>>>>>> ca598f40082c3bc50adabd7393e141dba499d8f6
 
 1. Server Configuration  
 Server Configuration
@@ -141,14 +131,10 @@ Close server connection
 List all labels
 
 11. Forward  
-<<<<<<< HEAD
-Forward  
-=======
-Forward
+Forward an email
 
 12. Download attachments for ID  
 Downloads email attachments and saves them in a folder  
->>>>>>> ca598f40082c3bc50adabd7393e141dba499d8f6
 
 
 

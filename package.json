@@ -1076,188 +1076,131 @@
     {
       "en": {
         "title": "Forward",
-        "description": "Forward",
+        "description": "Forward an email",
         "title_options": "Select Option",
         "options": null
       },
       "es": {
-        "title": "Forward",
-        "description": "Forward",
+        "title": "Reenviar",
+        "description": "Reenviar an email",
         "title_options": "Seleccione una opción",
         "options": null
       },
-<<<<<<< HEAD
       "pr": {
-        "title": "Forward",
-        "description": "Forward",
+        "title": "Reenviar",
+        "description": "Reenviar um email",
         "title_options": "Selecione uma opção",
         "options": null
       },
-=======
->>>>>>> ca598f40082c3bc50adabd7393e141dba499d8f6
       "form": {
         "css": "modal-lg",
         "inputs": [
           {
             "type": "input",
-<<<<<<< HEAD
             "description": {
               "es": "Nombre de la sesión que va a usar",
               "en": "Name of the session to use",
               "pr": "Nome da sessão a ser usada"
             },
-=======
->>>>>>> ca598f40082c3bc50adabd7393e141dba499d8f6
             "placeholder": "session1",
             "title": {
               "es": "Sesión:",
               "en": "Session:",
-<<<<<<< HEAD
               "pr": "Sessão:"
-=======
-              "cn": "Session:"
->>>>>>> ca598f40082c3bc50adabd7393e141dba499d8f6
             },
             "id": "session",
             "css": "col-md-6"
           },
           {
             "type": "input",
-<<<<<<< HEAD
             "description": {
               "es": "ID obtenido en los comandos para listar email",
               "en": "ID obtained in the commands to list email",
               "pr": "ID obtido nos comandos para listar email"
             },
-=======
->>>>>>> ca598f40082c3bc50adabd7393e141dba499d8f6
             "placeholder": "321",
             "title": {
               "es": "ID Mail:",
               "en": "ID Mail:"
             },
-<<<<<<< HEAD
-            "id": "bcc",
-=======
             "id": "id_mail",
->>>>>>> ca598f40082c3bc50adabd7393e141dba499d8f6
             "css": "col-md-12"
           },
           {
             "type": "input",
-<<<<<<< HEAD
             "description": {
               "es": "Destinatarios del mensaje. Deben estar separados por coma",
               "en": "Message receivers. They must be separated by commas",
               "pr": "Destinatários da mensagem. Devem ser separados por vírgulas"
             },
-=======
->>>>>>> ca598f40082c3bc50adabd7393e141dba499d8f6
             "placeholder": "to@mail.com, to2@mail.com",
             "title": {
               "es": "Para:",
               "en": "To:",
-<<<<<<< HEAD
               "pr": "Para:"
             },
             "help": {
               "es": "para varios destinatarios separar por coma",
               "en": "for multiple recipients, comma separated",
               "pr": "para vários destinatários separados por vírgula"
-=======
-              "cn": "To:"
-            },
-            "help": {
-              "es": "para varios destinatarios separar por coma",
-              "en": "for multiple recipients, comma separated"
->>>>>>> ca598f40082c3bc50adabd7393e141dba499d8f6
             },
             "id": "to",
             "css": "col-md-12"
           },
           {
             "type": "input",
-<<<<<<< HEAD
             "description": {
               "es": "Destinatarios enviados por copia. Deben estar separados por coma",
               "en": "Recipients sent by copy. They must be separated by commas",
               "pr": "Destinatários enviados por cópia. Devem ser separados por vírgulas"
             },
-=======
->>>>>>> ca598f40082c3bc50adabd7393e141dba499d8f6
             "placeholder": "cc@mail.com, cc2@mail.com",
             "title": {
               "es": "Copia:",
               "en": "Cc:",
-<<<<<<< HEAD
               "pr": "Cópia:"
             },
             "help": {
               "es": "para varios destinatarios separar por coma",
               "en": "for multiple recipients, comma separated",
               "pr": "para vários destinatários separados por vírgula"
-=======
-              "cn": "Cc:"
-            },
-            "help": {
-              "es": "para varios destinatarios separar por coma",
-              "en": "for multiple recipients, comma separated"
->>>>>>> ca598f40082c3bc50adabd7393e141dba499d8f6
             },
             "id": "cc",
             "css": "col-md-12"
           },
           {
             "type": "input",
-<<<<<<< HEAD
             "description": {
               "es": "Destinatarios enviados por copia oculta. Deben estar separados por coma",
               "en": "Recipients sent by hiden copy. They must be separated by commas",
               "pr": "Destinatários enviados por cópia oculta. Devem ser separados por vírgulas"
             },
-=======
->>>>>>> ca598f40082c3bc50adabd7393e141dba499d8f6
             "placeholder": "bcc@mail.com, bcc2@mail.com",
             "title": {
               "es": "Copia Oculta:",
               "en": "Bcc:",
-<<<<<<< HEAD
               "pr": "Cópia oculta:"
             },
             "help": {
               "es": "para varios destinatarios separar por coma",
               "en": "for multiple recipients, comma separated",
               "pr": "para vários destinatários separados por vírgula"
-=======
-              "cn": "Bcc:"
-            },
-            "help": {
-              "es": "para varios destinatarios separar por coma",
-              "en": "for multiple recipients, comma separated"
->>>>>>> ca598f40082c3bc50adabd7393e141dba499d8f6
             },
             "id": "bcc",
             "css": "col-md-12"
           },
           {
             "type": "input",
-<<<<<<< HEAD
             "description": {
               "es": "Asunto del mensaje",
               "en": "Message subject",
               "pr": "Assunto da mensagem"
             },
-=======
->>>>>>> ca598f40082c3bc50adabd7393e141dba499d8f6
             "placeholder": "Nuevo mail",
             "title": {
               "es": "Asunto:",
               "en": "Subject:",
-<<<<<<< HEAD
               "pr": "Assunto:"
-=======
-              "cn": "Subject:"
->>>>>>> ca598f40082c3bc50adabd7393e141dba499d8f6
             },
             "id": "subject",
             "css": "col-md-12"
@@ -1276,8 +1219,6 @@
       "windows": true,
       "mac": true,
       "docker": true
-<<<<<<< HEAD
-=======
     },
     {
         "en": {
@@ -1354,7 +1295,6 @@
       "windows": true,
       "mac": true,
       "docker": true
->>>>>>> ca598f40082c3bc50adabd7393e141dba499d8f6
     }
   ]
 }
