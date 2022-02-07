@@ -6,13 +6,18 @@
   
 Módulo para realizar acciones en Gmail  
   
+<<<<<<< HEAD
 ![banner](imgs/Banner_gmail_suite.png)
+=======
+![banner](/docs/imgs/Banner_gmail_suite.png)
+>>>>>>> ca598f40082c3bc50adabd7393e141dba499d8f6
 ## Como instalar este módulo
   
 __Descarga__ e __instala__ el contenido en la carpeta 'modules' en la ruta de rocketbot.  
 
 
 
+<<<<<<< HEAD
 
 # Como usar este modulo
 Para trabajar con este modulo es necesario activar la API de gmail. Para esto, debes seguir los siguientes pasos.
@@ -75,6 +80,8 @@ Para prevenir confirmar cada semana, puedes publicar la aplicación para que goo
 
 
 
+=======
+>>>>>>> ca598f40082c3bc50adabd7393e141dba499d8f6
 ## Descripción de los comandos
 
 ### Configurar Servidor
@@ -82,16 +89,24 @@ Para prevenir confirmar cada semana, puedes publicar la aplicación para que goo
 Configurar Servidor
 |Parámetros|Descripción|ejemplo|
 | --- | --- | --- |
+<<<<<<< HEAD
 |Credenciales|Ruta del archivo json descargado en el paso anterior|credentials.json|
 |User|Email que se usará para enviar correos. Puede estar en blanco si no enviarás emails.|user@example.com|
 |Sesión|Nombre de la sesión que le vamos a asignar|session1|
 |Asignar resultado a Variable|Resultado de la conexion|Variable|
+=======
+|Credenciales||credentials.json|
+|User||user@example.com|
+|Sesión||session1|
+|Asignar resultado a Variable||Variable|
+>>>>>>> ca598f40082c3bc50adabd7393e141dba499d8f6
 
 ### Enviar Email
   
 Envia un email, previamente debe configurar el servidor
 |Parámetros|Descripción|ejemplo|
 | --- | --- | --- |
+<<<<<<< HEAD
 |Sesión|Nombre de la sesión que va a usar.|session1|
 |Para|Destinatarios del mensaje. Deben estar separados por coma|to@mail.com, to2@mail.com|
 |Copia|Destinatarios enviados por copia. Deben ir separados por coma|cc@mail.com, cc2@mail.com|
@@ -100,88 +115,164 @@ Envia un email, previamente debe configurar el servidor
 |Mensaje|Cuerpo del mail. Se pueden usar etiquetas html|Hi from Rocketbot!|
 |Archivo Adjunto|Ruta del archivo que se desea adjuntar|C:\User\Desktop\test.txt|
 |Carpeta (Varios archivos)|Ruta de la carpeta con los archivos que se desa adjuntar|C:\User\Desktop\Files|
+=======
+|Sesión||session1|
+|Para||to@mail.com, to2@mail.com|
+|Copia||cc@mail.com, cc2@mail.com|
+|Copia Oculta||bcc@mail.com, bcc2@mail.com|
+|Asunto||Nuevo mail|
+|Mensaje||Hi from Rocketbot!|
+|Archivo Adjunto||C:\User\Desktop\test.txt|
+|Carpeta (Varios archivos)||C:\User\Desktop\Files|
+>>>>>>> ca598f40082c3bc50adabd7393e141dba499d8f6
 
 ### Lista todos los email
   
 Lista todos los email, se puede especificar un filtro
 |Parámetros|Descripción|ejemplo|
 | --- | --- | --- |
+<<<<<<< HEAD
 |Filtro|Puedes usar todas las opciones de filtro de gmail.|subject:COMPRA|
 |Carpeta|Carpeta desde donde se desa listar todos los emails|INBOX|
 |Sesión|Nombre de la sesión que se va a usar|session1|
 |Ordenar por||{}|
 |Asignar a variable|Nombre de la variable donde se guardará la lista de email|Variable|
+=======
+|Filtro||subject:COMPRA|
+|Label||INBOX|
+|Sesión||session1|
+|Ordenar por||{}|
+|Asignar a variable||Variable|
+>>>>>>> ca598f40082c3bc50adabd7393e141dba499d8f6
 
 ### Lista emails no leídos
   
 Lista emails no leídos
 |Parámetros|Descripción|ejemplo|
 | --- | --- | --- |
+<<<<<<< HEAD
 |Filtro|Puedes usar todas las opciones de filtro de gmail|subject:COMPRA|
 |Carpeta|Especificar nombre de la carpeta desde donde se quiere obtener los emails, por defecto inbox|inbox|
 |Sesión|Nombre de la sesión que va a usar|session1|
 |Ordenar por||{}|
 |Asignar a variable|Nombre de la variable donde se guardará la lista de email|Variable|
+=======
+|Filtro||subject:COMPRA|
+|Sesión||session1|
+|Ordenar por||{}|
+|Asignar a variable||Variable|
+>>>>>>> ca598f40082c3bc50adabd7393e141dba499d8f6
 
 ### Leer email por ID
   
 Leer email por ID
 |Parámetros|Descripción|ejemplo|
 | --- | --- | --- |
+<<<<<<< HEAD
 |ID del email|Id obtenido en los comandos para listar email|345|
 |Sesión|Nombre de la sesión que va a usar|session1|
 |Asignar a variable|Nombre de la variable donde se guardará el contenido del mail leído|Variable|
 |Ruta para descargar adjuntos|Ruta de la carpeta donde se guardarán los archivos adjuntos|C:\User\Desktop|
+=======
+|ID del email||345|
+|Sesión||session1|
+|Asignar a variable||Variable|
+|Ruta para descargar adjuntos||C:\User\Desktop|
+>>>>>>> ca598f40082c3bc50adabd7393e141dba499d8f6
 
 ### Crear Etiqueta
   
 Crea una etiqueta
 |Parámetros|Descripción|ejemplo|
 | --- | --- | --- |
+<<<<<<< HEAD
 |Nombre Etiqueta|Nombre de la etiqueta a crear|Ingrese nombre de la etiqueta|
 |Sesión|Nombre de la sesión que va a usar|session1|
+=======
+|Nombre Etiqueta||Ingrese nombre de la etiqueta|
+|Sesión||session1|
+>>>>>>> ca598f40082c3bc50adabd7393e141dba499d8f6
 
 ### Mover email a etiqueta
   
 Mueve email a una etiqueta
 |Parámetros|Descripción|ejemplo|
 | --- | --- | --- |
+<<<<<<< HEAD
 |ID del email|ID obtenido en los comandos para listar email|Ingrese ID del email|
 |Nombre de la etiqueta|Etiqueta a dónde se moverá el email|test|
 |Sesión|Nombre de la sesión que va a usar|session1|
 |Asignar resultado a variable|Variable donde se guardará. True si se movió el mail. Caso contrario, retomará False|Variable|
+=======
+|ID del email||Ingrese ID del email|
+|Nombre de la etiqueta||test|
+|Sesión||session1|
+|Asignar resultado a variable||Variable|
+>>>>>>> ca598f40082c3bc50adabd7393e141dba499d8f6
 
 ### Marcar email como no leído
   
 Marcar email como no leído
 |Parámetros|Descripción|ejemplo|
 | --- | --- | --- |
+<<<<<<< HEAD
 |ID del email|ID obtenido en los comandos para listar email|Ingrese ID del email|
 |Sesión|Nombre de la sesión que va a usar|session1|
+=======
+|ID del email||Ingrese ID del email|
+|Sesión||session1|
+>>>>>>> ca598f40082c3bc50adabd7393e141dba499d8f6
 
 ### Cerrar Conexión
   
 Cierra la conexión del servidor
 |Parámetros|Descripción|ejemplo|
 | --- | --- | --- |
+<<<<<<< HEAD
 |Sesión|Nombre de la sesión que va a usar|session1|
+=======
+|Sesión||session1|
+>>>>>>> ca598f40082c3bc50adabd7393e141dba499d8f6
 
 ### Lista todas las etiquetas
   
 Lista todas las etiquetas
 |Parámetros|Descripción|ejemplo|
 | --- | --- | --- |
+<<<<<<< HEAD
 |Sesión|Nombre de la sesión que va a usar|session1|
 |Asignar a variable|Variable donde se guardaran las etiquetas|Variable|
+=======
+|Sesión||session1|
+|Asignar a variable||Variable|
+>>>>>>> ca598f40082c3bc50adabd7393e141dba499d8f6
 
 ### Forward
   
 Forward
 |Parámetros|Descripción|ejemplo|
 | --- | --- | --- |
+<<<<<<< HEAD
 |Sesión|Nombre de la sesión que va a usar|session1|
 |ID Mail|ID obtenido en los comandos para listar email|321|
 |Para|Destinatarios del mensaje. Deben estar separados por coma|to@mail.com, to2@mail.com|
 |Copia|Destinatarios enviados por copia. Deben estar separados por coma|cc@mail.com, cc2@mail.com|
 |Copia Oculta|Destinatarios enviados por copia oculta. Deben estar separados por coma|bcc@mail.com, bcc2@mail.com|
 |Asunto|Asunto del mensaje|Nuevo mail|
+=======
+|Sesión||session1|
+|ID Mail||321|
+|Para||to@mail.com, to2@mail.com|
+|Copia||cc@mail.com, cc2@mail.com|
+|Copia Oculta||bcc@mail.com, bcc2@mail.com|
+|Asunto||Nuevo mail|
+
+### Descargar adjuntos por ID
+  
+Descarga los archivos adjuntos de un correo y los guarda en una carpeta
+|Parámetros|Descripción|ejemplo|
+| --- | --- | --- |
+|ID del email|ID del email a leer|345|
+|Sesión|Sesión de Gmail|Default|
+|Ruta para descargar adjuntos|Ruta donde se guardarán los adjuntos|C:/User/Desktop|
+>>>>>>> ca598f40082c3bc50adabd7393e141dba499d8f6
