@@ -19,24 +19,24 @@ Google](https://console.cloud.google.com/projectcreate?previousPage=%2Fhome%2Fda
  para crear un nuevo proyecto (Si ya tienes uno creado, omita este paso) y complete los datos indicados en el formulario
 
 
-![](imgs/proyectonuevo.png)
+![](docs/imgs//proyectonuevo.png)
 
 En la barra superior verás el nombre del proyecto. Si no se visualiza, cambie al proyecto
  creado haciendo click en la en el menu que se encuentra remarcado en la imagen.
 
-![](imgs/seleccionarproyecto.png)
+![](docs/imgs//seleccionarproyecto.png)
 
 Si 
 tienes el mensaje "No cuentas con los permisos suficientes para ver esta página." como se muestra en la imagen anterior,
  de click en **API y Servicios** del panel izquierdo, y luego de cambiar a la página, hacer click en **HABILITAR API Y 
 SERVICIOS**
 
-![](imgs/habilitarapiyservicios.png)
+![](docs/imgs//habilitarapiyservicios.png)
 
 Dentro del buscador "Buscar API y servicios" escriba **Gmail API**. 
 Luego, habilitar la API dando click en **Habilitar**
 
-![](imgs/gamialapi.png)
+![](docs/imgs//gamialapi.png)
 
 Tardará un momento en cargar y la página 
 redireccionará a la página de configuración de la API.
@@ -44,18 +44,18 @@ redireccionará a la página de configuración de la API.
 * Haga click en **CREAR CREDENCIALES**, para crear las 
 credenciales
 
-![](imgs/crearcredenciales.png)
+![](docs/imgs//crearcredenciales.png)
 
 El primer paso es seleccionar el tipo de credencial. Seleccionamos 
 **Gmail API** y tildamos la opción **Datos del usuario**. A continuación haga click en siguiente.
 
 
-![](imgs/tipocredencial.png)
+![](docs/imgs//tipocredencial.png)
 
 En la pantalla de consentimiento, escribir un nombre para la aplicación y seleccionar un 
 correo electrónico.
 
-![](imgs/pantallaconsentimiento.png)
+![](docs/imgs//pantallaconsentimiento.png)
 
 En la pantalla de permisos, haga click en **AGREGAR O QUITAR 
 PERMISOS**. Se abrirá un modal para seleccionar los permisos. En el filtro escriba **Gmail API**, click en el menu 
@@ -63,25 +63,25 @@ desplegable **Filas por pagina** y seleccione **100** para poder ver todas las o
 **API**, luego click en **Actualizar**.
 
 
-![](imgs/agregarpermisos.png)
+![](docs/imgs//agregarpermisos.png)
 
-![](imgs/actualizar.png)
+![](docs/imgs//actualizar.png)
 
 Una vez se agreguen 
 los permisos seleccionados, da click en **GUARDAR Y CONTINUAR**
 
-![](imgs/guardarycontinuar.png)
+![](docs/imgs//guardarycontinuar.png)
 
 Finalmente, en la 
 pantalla de OAuth, seleccionar el tipo de aplicación **APP de escritorio**, y agregar un nombre. Finalizamos dando click
  en crear.
 
-![](imgs/oauth.png)
+![](docs/imgs//oauth.png)
 
 Nos creará las credenciales, damos click en descargar y luego en listo. Es importante 
 mantener el archivo descargado. Se utilizará más adelante en el módulo.
 
-![](imgs/descargar.png)
+![](docs/imgs//descargar.png)
 
 En el menú de la 
 izquierda, al dar click en **Pantalla de consentimiento**, si tienes una cuenta corporativa de gmail, podrás utilizar la
@@ -89,9 +89,9 @@ izquierda, al dar click en **Pantalla de consentimiento**, si tienes una cuenta 
 que dar el consentimiento una vez a la semana para poder conectarte a tu cuenta de correo y verás que tu tipo de usuario
  es **Externo** y deberás agregar usuarios de prueba.
 
-![](imgs/interno.png)
+![](docs/imgs//interno.png)
 
-![](imgs/externo.png)
+![](docs/imgs//externo.png)
 
 Para prevenir 
 confirmar cada semana, puedes publicar la aplicación para que google la apruebe y puedas usarla indefinidamente.
@@ -101,7 +101,7 @@ confirmar cada semana, puedes publicar la aplicación para que google la apruebe
 
 
 1. Server Configuration  
-Server Configuration
+Configure the mail server to be used
 
 2. Send Email  
 Send email, before you must configurate the server
@@ -110,25 +110,25 @@ Send email, before you must configurate the server
 List all email, you can specify a filter
 
 4. List unread emails  
-List all unread email, you can specify a filter
+List unread emails, you can specify a filter
 
 5. Read email for ID  
-Read email for ID
+You can specify the ID of an email to read it
 
 6. Create Label  
-Create Label
+You can create a label with the name you want
 
 7. Move email to label  
-Move email to label
+Move email from one label to another
 
 8. Mark email as unread  
-Mark email as unread
+Any previously opened email can be marked as unread
 
 9. Close Server  
 Close server connection
 
 10. List all labels  
-List all labels
+Get a list of all mail labels and store them in a variable
 
 11. Forward  
 Forward an email
@@ -138,6 +138,8 @@ Downloads email attachments and saves them in a folder
 
 
 
+### Changes
+Mon Feb 7 11:16:46 2022  [hidden] merge conflicts fixed
 
 ----
 ### OS
