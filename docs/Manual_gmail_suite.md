@@ -79,7 +79,7 @@ Para prevenir confirmar cada semana, puedes publicar la aplicación para que goo
 
 ### Configurar Servidor
   
-Configurar Servidor
+Configurar el servidor del mail que se va a usar
 |Parámetros|Descripción|ejemplo|
 | --- | --- | --- |
 |Credenciales|Ruta del archivo json descargado en el paso anterior|credentials.json|
@@ -114,7 +114,7 @@ Lista todos los email, se puede especificar un filtro
 
 ### Lista emails no leídos
   
-Lista emails no leídos
+Lista emails no leídos, se puede especificar un filtro
 |Parámetros|Descripción|ejemplo|
 | --- | --- | --- |
 |Filtro|Puedes usar todas las opciones de filtro de gmail|subject:COMPRA|
@@ -125,7 +125,7 @@ Lista emails no leídos
 
 ### Leer email por ID
   
-Leer email por ID
+Se puede especifiacar el ID de un email para leerlo
 |Parámetros|Descripción|ejemplo|
 | --- | --- | --- |
 |ID del email|Id obtenido en los comandos para listar email|345|
@@ -135,7 +135,7 @@ Leer email por ID
 
 ### Crear Etiqueta
   
-Crea una etiqueta
+Se puede crear una etiqueta con el nombre que desees
 |Parámetros|Descripción|ejemplo|
 | --- | --- | --- |
 |Nombre Etiqueta|Nombre de la etiqueta a crear|Ingrese nombre de la etiqueta|
@@ -143,7 +143,7 @@ Crea una etiqueta
 
 ### Mover email a etiqueta
   
-Mueve email a una etiqueta
+Mover email de una etiqueta a otra
 |Parámetros|Descripción|ejemplo|
 | --- | --- | --- |
 |ID del email|ID obtenido en los comandos para listar email|Ingrese ID del email|
@@ -153,7 +153,7 @@ Mueve email a una etiqueta
 
 ### Marcar email como no leído
   
-Marcar email como no leído
+Se puede marcar como no leido cualquier email previamente abierto
 |Parámetros|Descripción|ejemplo|
 | --- | --- | --- |
 |ID del email|ID obtenido en los comandos para listar email|Ingrese ID del email|
@@ -168,7 +168,7 @@ Cierra la conexión del servidor
 
 ### Lista todas las etiquetas
   
-Lista todas las etiquetas
+Obtiene una lista de todas las etiquetas del mail y las almacena en una variable
 |Parámetros|Descripción|ejemplo|
 | --- | --- | --- |
 |Sesión|Nombre de la sesión que va a usar|session1|
@@ -176,7 +176,7 @@ Lista todas las etiquetas
 
 ### Reenviar
   
-Reenviar un email
+Reenviar an email
 |Parámetros|Descripción|ejemplo|
 | --- | --- | --- |
 |Sesión|Nombre de la sesión que va a usar|session1|
@@ -185,3 +185,12 @@ Reenviar un email
 |Copia|Destinatarios enviados por copia. Deben estar separados por coma|cc@mail.com, cc2@mail.com|
 |Copia Oculta|Destinatarios enviados por copia oculta. Deben estar separados por coma|bcc@mail.com, bcc2@mail.com|
 |Asunto|Asunto del mensaje|Nuevo mail|
+
+### Descargar adjuntos por ID
+  
+Descarga los archivos adjuntos de un correo y los guarda en una carpeta
+|Parámetros|Descripción|ejemplo|
+| --- | --- | --- |
+|ID del email|ID del email a leer|345|
+|Sesión|Sesión de Gmail|Default|
+|Ruta para descargar adjuntos|Ruta donde se guardarán los adjuntos|C:/User/Desktop|

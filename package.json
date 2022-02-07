@@ -23,19 +23,19 @@
     {
       "en": {
         "title": "Server Configuration",
-        "description": "Server Configuration",
+        "description": "Configure the mail server to be used",
         "title_options": "Select Option",
         "options": null
       },
       "es": {
         "title": "Configurar Servidor",
-        "description": "Configurar Servidor",
+        "description": "Configurar el servidor del mail que se va a usar",
         "title_options": "Seleccione una opción",
         "options": null
       },
       "pr": {
         "title": "Configuração do servidor",
-        "description": "Configuração do servidor",
+        "description": "Configure o servidor de email a ser usado",
         "title_options": "Selecione uma opção",
         "options": null
       },
@@ -460,19 +460,19 @@
     {
       "en": {
         "title": "List unread emails",
-        "description": "List all unread email, you can specify a filter",
+        "description": "List unread emails, you can specify a filter",
         "title_options": "Select Option",
         "options": null
       },
       "es": {
         "title": "Lista emails no leídos",
-        "description": "Lista emails no leídos",
+        "description": "Lista emails no leídos, se puede especificar un filtro",
         "title_options": "Seleccione una opción",
         "options": null
       },
       "pr": {
         "title": "Lista de e-mail não lida",
-        "description": "Lista de e-mail não lida",
+        "description": "Listar e-mails não lidos, você pode especificar um filtro",
         "title_options": "Selecione uma opção",
         "options": null
       },
@@ -599,19 +599,19 @@
     {
       "en": {
         "title": "Read email for ID",
-        "description": "Read email for ID",
+        "description": "You can specify the ID of an email to read it",
         "title_options": "Select Option",
         "options": null
       },
       "es": {
         "title": "Leer email por ID",
-        "description": "Leer email por ID",
+        "description": "Se puede especifiacar el ID de un email para leerlo",
         "title_options": "Seleccione una opción",
         "options": null
       },
       "pr": {
-        "title": "Ler e-mail por ID",
-        "description": "Ler e-mail por ID",
+        "title": "Ler email por ID",
+        "description": "Você pode especificar o ID de um email para lê-lo",
         "title_options": "Selecione uma opção",
         "options": null
       },
@@ -705,19 +705,19 @@
     {
       "en": {
         "title": "Create Label",
-        "description": "Create Label",
+        "description": "You can create a label with the name you want",
         "title_options": "Select Option",
         "options": null
       },
       "es": {
         "title": "Crear Etiqueta",
-        "description": "Crea una etiqueta",
+        "description": "Se puede crear una etiqueta con el nombre que desees",
         "title_options": "Seleccione una opción",
         "options": null
       },
       "pr": {
         "title": "Criar etiqueta",
-        "description": "Criar etiqueta",
+        "description": "Você pode criar uma etiqueta com o nome que quiser",
         "title_options": "Selecione uma opção",
         "options": null
       },
@@ -774,19 +774,19 @@
     {
       "en": {
         "title": "Move email to label",
-        "description": "Move email to label",
+        "description": "Move email from one label to another",
         "title_options": "Select Option",
         "options": null
       },
       "es": {
         "title": "Mover email a etiqueta",
-        "description": "Mueve email a una etiqueta",
+        "description": "Mover email de una etiqueta a otra",
         "title_options": "Seleccione una opción",
         "options": null
       },
       "pr": {
         "title": "Mover e-mail para marcador",
-        "description": "Mover e-mail para marcador",
+        "description": "Mover e-mail de um marcador para outro",
         "title_options": "Selecione uma opção",
         "options": null
       },
@@ -880,19 +880,19 @@
     {
       "en": {
         "title": "Mark email as unread",
-        "description": "Mark email as unread",
+        "description": "Any previously opened email can be marked as unread",
         "title_options": "Select Option",
         "options": null
       },
       "es": {
         "title": "Marcar email como no leído",
-        "description": "Marcar email como no leído",
+        "description": "Se puede marcar como no leido cualquier email previamente abierto",
         "title_options": "Seleccione una opción",
         "options": null
       },
       "pr": {
         "title": "Marcar e-mail como não lido",
-        "description": "Marcar e-mail como não lido",
+        "description": "Qualquer email aberto anteriormente pode ser marcado como não lido",
         "title_options": "Selecione uma opção",
         "options": null
       },
@@ -1002,19 +1002,19 @@
     {
       "en": {
         "title": "List all labels",
-        "description": "List all labels",
+        "description": "Get a list of all mail labels and store them in a variable",
         "title_options": "Select Option",
         "options": null
       },
       "es": {
         "title": "Lista todas las etiquetas",
-        "description": "Lista todas las etiquetas",
+        "description": "Obtiene una lista de todas las etiquetas del mail y las almacena en una variable",
         "title_options": "Seleccione una opción",
         "options": null
       },
       "pr": {
         "title": "listar todas as tags",
-        "description": "listar todas as tags",
+        "description": "Obtenha uma lista de todas as etiquetas de correio e armazene-as em uma variável",
         "title_options": "Selecione uma opção",
         "options": null
       },
