@@ -262,13 +262,6 @@ if module == "get_mail":
         raise e
 
 if module == "forward":
-<<<<<<< HEAD
-    id_ = '17d9f1b190f48c5e'
-    #var_ = GetParams('var_')
-    att_folder = ''
-    session = 'nicolas'
-
-=======
     id_ = GetParams('id_mail')
     var_ = GetParams('var_')
     att_folder = GetParams('att_folder')
@@ -280,16 +273,11 @@ if module == "forward":
 
     if not id_:
         raise Exception("No mail id")
->>>>>>> ca598f40082c3bc50adabd7393e141dba499d8f6
     if not session:
             session = SESSION_DEFAULT
     service = mod_gmail_suite_sessions[session]["service"]
     gmail_suite = mod_gmail_suite_sessions[session]["gmail"]
     try:
-<<<<<<< HEAD
-
-=======
->>>>>>> ca598f40082c3bc50adabd7393e141dba499d8f6
         message = service.users().messages().get(userId='me', id=id_, format='full').execute()
         mime_message = service.users().messages().get(userId='me', id=id_, format='raw').execute()
         msg_str = base64.urlsafe_b64decode(mime_message['raw'].encode("utf-8")).decode("utf-8")
@@ -338,22 +326,12 @@ if module == "forward":
         message = service.users().messages().modify(userId='me', id=id_, body=body).execute()
 
         filenames = []
-<<<<<<< HEAD
-        to = 'nick.sfra.7@gmail.com'
-        cc=''
-        bcc=''
-        subject=''
-=======
->>>>>>> ca598f40082c3bc50adabd7393e141dba499d8f6
         msg = create_message(gmail_suite.user_id, to, cc, bcc, subject, bs, filenames)
         sent = service.users().messages().send(userId='me', body=msg).execute()
 
         print('Message Id: %s' % sent['id'])
     except Exception as e:
-<<<<<<< HEAD
-=======
         
->>>>>>> ca598f40082c3bc50adabd7393e141dba499d8f6
         print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
         PrintException()
         raise e
