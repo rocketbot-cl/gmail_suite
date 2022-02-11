@@ -6,13 +6,11 @@
   
 Módulo para realizar acciones en Gmail  
 
-## How to install this module
-  
-__Download__ and __install__ the content in 'modules' folder in Rocketbot path  
+# Cómo instalar este módulo
+**Descargar** e **instala** el contenido en la carpeta "modules" en la ruta de RocketBot.
 
-
-# Como usar este modulo
-Para trabajar con este modulo es necesario activar la API de gmail. Para esto, debes seguir los 
+# Cómo usar este módulo
+Para trabajar con este módulo es necesario activar la API de gmail. Para esto, debes seguir los 
 siguientes pasos.
 * Ir a [Consola de 
 Google](https://console.cloud.google.com/projectcreate?previousPage=%2Fhome%2Fdashboard%3Fproject%3Dprueba-312216%26hl%3Des&folder=&organizationId=777182023349&hl=es)
@@ -136,10 +134,6 @@ Forward an email
 12. Download attachments for ID  
 Downloads email attachments and saves them in a folder  
 
-
-
-### Changes
-Mon Feb 7 11:16:46 2022  [hidden] merge conflicts fixed
 
 ----
 ### OS
