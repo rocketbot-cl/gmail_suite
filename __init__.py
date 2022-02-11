@@ -31,6 +31,7 @@ from email import encoders
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.utils import make_msgid
+import traceback
 
 base_path = tmp_global_obj["basepath"]
 cur_path = base_path + 'modules' + os.sep + 'gmail_suite' + os.sep + 'libs' + os.sep
@@ -96,27 +97,31 @@ def get_msg_attach(file):
 
 
 def create_message(sender, to_, cc_, bcc_, subject_, message_text, filenames_):
-    global get_msg_attach, MIMEMultipart, MIMEText, base64
-    message = MIMEMultipart()
-    message.attach(MIMEText(message_text, 'html'))
-    message['to'] = to_
-    message['cc'] = cc_
-    message['bcc'] = bcc_
-    message['from'] = sender
-    message['subject'] = subject_
+    try:
+        global get_msg_attach, MIMEMultipart, MIMEText, base64
+        message = MIMEMultipart()
+        message.attach(MIMEText(message_text, 'html'))
+        message['to'] = to_
+        message['cc'] = cc_
+        message['bcc'] = bcc_
+        message['from'] = sender
+        message['subject'] = subject_
 
-    for file in filenames_:
-        filename_ = os.path.basename(file)
+        for file in filenames_:
+            filename_ = os.path.basename(file)
 
-        msg_ = get_msg_attach(file)
-        msg_.add_header('Content-Disposition', 'attachment', filename=os.path.basename(filename_))
+            msg_ = get_msg_attach(file)
+            msg_.add_header('Content-Disposition', 'attachment', filename=os.path.basename(filename_))
 
-        message.attach(msg_)
+            message.attach(msg_)
 
-    raw_message = base64.urlsafe_b64encode(message.as_bytes())
-    return {
-        'raw': raw_message.decode("utf-8")
-    }
+        raw_message = base64.urlsafe_b64encode(message.as_bytes())
+        return {
+            'raw': raw_message.decode("utf-8")
+        }
+    except Exception as e:
+        print("Esta fue el error:", e)
+        print('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e)
 
 
 class GmailSuite:
@@ -257,17 +262,22 @@ if module == "get_mail":
         raise e
 
 if module == "forward":
-    id_ = '17d9f1b190f48c5e'
-    #var_ = GetParams('var_')
-    att_folder = ''
-    session = 'nicolas'
+    id_ = GetParams('id_mail')
+    var_ = GetParams('var_')
+    att_folder = GetParams('att_folder')
+    session = GetParams('session')
+    to = GetParams('to')
+    cc = GetParams('cc')
+    bcc = GetParams('bcc')
+    subject = GetParams('subject')
 
+    if not id_:
+        raise Exception("No mail id")
     if not session:
             session = SESSION_DEFAULT
     service = mod_gmail_suite_sessions[session]["service"]
     gmail_suite = mod_gmail_suite_sessions[session]["gmail"]
     try:
-
         message = service.users().messages().get(userId='me', id=id_, format='full').execute()
         mime_message = service.users().messages().get(userId='me', id=id_, format='raw').execute()
         msg_str = base64.urlsafe_b64decode(mime_message['raw'].encode("utf-8")).decode("utf-8")
@@ -316,15 +326,12 @@ if module == "forward":
         message = service.users().messages().modify(userId='me', id=id_, body=body).execute()
 
         filenames = []
-        to = 'nick.sfra.7@gmail.com'
-        cc=''
-        bcc=''
-        subject=''
         msg = create_message(gmail_suite.user_id, to, cc, bcc, subject, bs, filenames)
         sent = service.users().messages().send(userId='me', body=msg).execute()
 
         print('Message Id: %s' % sent['id'])
     except Exception as e:
+        
         print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
         PrintException()
         raise e
@@ -334,15 +341,19 @@ if module == "get_unread":
     filter_ = GetParams('filtro')
     var_ = GetParams('var_')
     session = GetParams("session")
+    folder = GetParams("folder")
     order_by = GetParams("order_by")
     
+    if not folder:
+            folder = "inbox"
+            
     if not session:
             session = SESSION_DEFAULT
     try:
         service = mod_gmail_suite_sessions[session]["service"]
-        filter_ = "label:unread " + str(filter_) if filter_ else "label:unread"
+        filter_ = "label:unread " + str(filter_) + f" in:{folder}" if filter_ else f"label:unread in:{folder}" 
         mails = service.users().messages().list(userId='me', q=filter_).execute()
-
+        
         list_ = []
         if "messages" in mails:
             list_ = [mail["id"] for mail in mails["messages"]]
@@ -489,7 +500,7 @@ if module == "move_mail":
 
 if module == "markAsUnread":
     id_ = GetParams("id_")
-    var = GetParams("var")
+    var = GetParams("var")  
     session = GetParams("session")
     if not session:
             session = SESSION_DEFAULT
@@ -505,7 +516,7 @@ if module == "markAsUnread":
     except Exception as e:
         PrintException()
         raise e
-
+            
 if module == "close":
     session = GetParams("session")
     if not session:
@@ -528,6 +539,38 @@ if module == "listLabels":
         for label in labels['labels']:
             label_id_list.append(label['id'])
         SetVar(var_, label_id_list)
+    except Exception as e:
+        print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
+        PrintException()
+        raise e
+
+if module == "get_attachments":
+    id_ = GetParams('id_')
+    att_folder = GetParams('att_folder')
+    session = GetParams("session")
+    if not session:
+            session = SESSION_DEFAULT
+    service = mod_gmail_suite_sessions[session]["service"]
+    gmail_suite = mod_gmail_suite_sessions[session]["gmail"]
+    try:
+        message = service.users().messages().get(userId='me', id=id_, format='full').execute()
+        mime_message = service.users().messages().get(userId='me', id=id_, format='raw').execute()
+        msg_str = base64.urlsafe_b64decode(mime_message['raw'].encode("utf-8")).decode("utf-8")
+        mail_ = mailparser.parse_from_string(msg_str)
+        nameFile = []
+        if "parts" in message['payload']:
+            for part in message['payload']['parts']:
+                if part['filename'] and part['body'] and part['body']['attachmentId'] and att_folder:
+                    attachment = service.users().messages().attachments().get(id=part['body']['attachmentId'],
+                                                                              userId='me', messageId=id_).execute()
+
+                    file_data = base64.urlsafe_b64decode(attachment['data'].encode('utf-8'))
+                    if not att_folder.endswith("/"):
+                        att_folder += "/"
+                    path = ''.join([att_folder, part['filename']])
+
+                    with open(path, 'wb') as f:
+                        f.write(file_data)
     except Exception as e:
         print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
         PrintException()
