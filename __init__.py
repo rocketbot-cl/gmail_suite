@@ -106,13 +106,14 @@ def create_message(sender, to_, cc_, bcc_, subject_, message_text, filenames_):
         message['bcc'] = bcc_
         message['from'] = sender
         message['subject'] = subject_
-
+        
         for file in filenames_:
             filename_ = os.path.basename(file)
-
-            msg_ = get_msg_attach(file)
-            msg_.add_header('Content-Disposition', 'attachment', filename=os.path.basename(filename_))
-
+            attach_file = open(file, 'rb')
+            msg_ = MIMEBase('application', 'octet-stream')
+            msg_.set_payload(attach_file.read())
+            encoders.encode_base64(msg_)  # encode the attachment
+            msg_.add_header('Content-Disposition', 'attachment', filename= filename_)
             message.attach(msg_)
 
         raw_message = base64.urlsafe_b64encode(message.as_bytes())
