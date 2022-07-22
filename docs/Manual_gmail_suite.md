@@ -1,196 +1,197 @@
-
-
-
-
 # Gmail G Suite
   
-Módulo para realizar acciones en Gmail  
+Module to perform actions in Gmail
+
+*Read this in other languages: [English](Manual_gmail_suite.md), [Portugues](Manual_gmail_suite.pr.md), [Español](Manual_gmail_suite.es.md).*
+
+*How to use: [English](/docs/how_to_use.md), [Portugues](/docs/how_to_use.pr.md), [Español](/docs/how_to_use.es.md).*
   
-![banner](imgs/Banner_gmail_suite.png)
-## Como instalar este módulo
+![banner](/docs/imgs/Banner_gmail_suite.png)
+## How to install this module
   
-__Descarga__ e __instala__ el contenido en la carpeta 'modules' en la ruta de rocketbot.  
+__Download__ and __install__ the content in 'modules' folder in Rocketbot path  
 
 
+# How to use
 
+*Read this in other languages: [English](how_to_use.md), [Portugues](how_to_use.pr.md), [Español](how_to_use.es.md).*
 
-# Como usar este modulo
-Para trabajar con este modulo es necesario activar la API de gmail. Para esto, debes seguir los siguientes pasos.
-* Ir a [Consola de Google](https://console.cloud.google.com/projectcreate?previousPage=%2Fhome%2Fdashboard%3Fproject%3Dprueba-312216%26hl%3Des&folder=&organizationId=777182023349&hl=es) para crear un nuevo proyecto (Si ya tienes uno creado, omita este paso) y complete los datos indicados en el formulario
+## Obtaining credentials:
+To work with this module it is necessary to activate the gmail API. For this, you must follow the following steps.
+* Go to [Google console](https://console.cloud.google.com/projectcreate?previousPage=%2Fhome%2Fdashboard%3Fproject%3Dprueba-312216%26hl%3Des&folder=&organizationId=777182023349&hl=es) to create a new project (If you already have one created, skip this step) and complete the information indicated in the form
 
 ![](imgs/proyectonuevo.png)
 
-En la barra superior verás el nombre del proyecto. Si no se visualiza, cambie al proyecto creado haciendo click en la en el menu que se encuentra remarcado en la imagen.
+In the top bar you will see the name of the project. If it is not displayed, change to the created project by clicking on the in the menu that is highlighted in the image.
 
 ![](imgs/seleccionarproyecto.png)
 
-Si tienes el mensaje "No cuentas con los permisos suficientes para ver esta página." como se muestra en la imagen anterior, de click en **API y Servicios** del panel izquierdo, y luego de cambiar a la página, hacer click en **HABILITAR API Y SERVICIOS**
+If you get the message "You do not have sufficient permissions to view this page." As shown in the image above, click on **API and Services** on the left panel, and after switching to the page, click on **ENABLE API AND SERVICES**
 
 ![](imgs/habilitarapiyservicios.png)
 
-Dentro del buscador "Buscar API y servicios" escriba **Gmail API**. Luego, habilitar la API dando click en **Habilitar**
+Within the browser "Search APIs and services" type **Gmail API**. Then, enable the API by clicking on **Enable**
 
 ![](imgs/gamialapi.png)
 
-Tardará un momento en cargar y la página redireccionará a la página de configuración de la API.
+It will take a moment to load and the page will redirect to the API settings page.
 
-* Haga click en **CREAR CREDENCIALES**, para crear las credenciales
+* Click on **CREATE CREDENTIALS**, to create the credentials
 
 ![](imgs/crearcredenciales.png)
 
-El primer paso es seleccionar el tipo de credencial. Seleccionamos **Gmail API** y tildamos la opción **Datos del usuario**. A continuación haga click en siguiente.
+The first step is to select the type of credential. We select **Gmail API** and check the option **User data**. Then click next.
 
 ![](imgs/tipocredencial.png)
 
-En la pantalla de consentimiento, escribir un nombre para la aplicación y seleccionar un correo electrónico.
+On the consent screen, type a name for the app and select an email.
 
 ![](imgs/pantallaconsentimiento.png)
 
-En la pantalla de permisos, haga click en **AGREGAR O QUITAR PERMISOS**. Se abrirá un modal para seleccionar los permisos. En el filtro escriba **Gmail API**, click en el menu desplegable **Filas por pagina** y seleccione **100** para poder ver todas las opciones, seleccione todas tildando **API**, luego click en **Actualizar**.
-
+On the permissions screen, click **ADD OR REMOVE PERMISSIONS**. A modal will open to select the permissions. In the filter type **Gmail API**, click on the dropdown menu **Rows per page** and select **100** to see all the options, select all by checking **API**, then click on * *Update**
 
 ![](imgs/agregarpermisos.png)
 
 ![](imgs/actualizar.png)
 
-Una vez se agreguen los permisos seleccionados, da click en **GUARDAR Y CONTINUAR**
+Once the selected permissions are added, click on **SAVE AND CONTINUE**
 
 ![](imgs/guardarycontinuar.png)
 
-Finalmente, en la pantalla de OAuth, seleccionar el tipo de aplicación **APP de escritorio**, y agregar un nombre. Finalizamos dando click en crear.
+Finally, on the OAuth screen, select the application type **Desktop APP**, and add a name. We finish by clicking on create.
 
 ![](imgs/oauth.png)
 
-Nos creará las credenciales, damos click en descargar y luego en listo. Es importante mantener el archivo descargado. Se utilizará más adelante en el módulo.
+It will create the credentials for us, we click on download and then on ready. It is important to keep the file downloaded. It will be used later in the module.
 
 ![](imgs/descargar.png)
 
-En el menú de la izquierda, al dar click en **Pantalla de consentimiento**, si tienes una cuenta corporativa de gmail, podrás utilizar la API indefinidamente y verás que el tipo de usuario es **Interno**. Si cuentas con una cuenta gmail gratuita, tendrás que dar el consentimiento una vez a la semana para poder conectarte a tu cuenta de correo y verás que tu tipo de usuario es **Externo** y deberás agregar usuarios de prueba.
+In the menu on the left, when you click on **Consent screen**, if you have a corporate gmail account, you will be able to use the API indefinitely and you will see that the type of user is **Internal**. If you have a free gmail account, you will have to give consent once a week to be able to connect to your email account and you will see that your user type is **External** and you will have to add test users.
 
 ![](imgs/interno.png)
 
 ![](imgs/externo.png)
 
-Para prevenir confirmar cada semana, puedes publicar la aplicación para que google la apruebe y puedas usarla indefinidamente.
+To prevent committing every week, you can publish the app for google approval and you can use it indefinitely.
 
 
 
-## Descripción de los comandos
+## Description of the commands
 
-### Configurar Servidor
+### Server Configuration
   
-Configurar el servidor del mail que se va a usar
-|Parámetros|Descripción|ejemplo|
+Configure the mail server to be used
+|Parameters|Description|example|
 | --- | --- | --- |
-|Credenciales|Ruta del archivo json descargado en el paso anterior|credentials.json|
-|User|Email que se usará para enviar correos. Puede estar en blanco si no enviarás emails.|user@example.com|
-|Sesión|Nombre de la sesión que le vamos a asignar|session1|
-|Asignar resultado a Variable|Resultado de la conexion|Variable|
+|Credentials|Path of the json file donwloaded in the previus step |credentials.json|
+|User|Email that will be used to send emails. It can be blank if you will not send emails|user@example.com|
+|Session|Name of the sesion we are going to asign|session1|
+|Assign result to a Variable|Result of the connection|Variable|
 
-### Enviar Email
+### Send Email
   
-Envia un email, previamente debe configurar el servidor
-|Parámetros|Descripción|ejemplo|
+Send email, before you must configurate the server
+|Parameters|Description|example|
 | --- | --- | --- |
-|Sesión|Nombre de la sesión que va a usar.|session1|
-|Para|Destinatarios del mensaje. Deben estar separados por coma|to@mail.com, to2@mail.com|
-|Copia|Destinatarios enviados por copia. Deben ir separados por coma|cc@mail.com, cc2@mail.com|
-|Copia Oculta|Destinatarios enviados por copia oculta. Deben ir separado por coma|bcc@mail.com, bcc2@mail.com|
-|Asunto|Asunto del mensaje|Nuevo mail|
-|Mensaje|Cuerpo del mail. Se pueden usar etiquetas html|Hi from Rocketbot!|
-|Archivo Adjunto|Ruta del archivo que se desea adjuntar|C:\User\Desktop\test.txt|
-|Carpeta (Varios archivos)|Ruta de la carpeta con los archivos que se desa adjuntar|C:\User\Desktop\Files|
+|Session|Name of the session we will be use|session1|
+|To|Message receivers. They must be separated by commas|to@mail.com, to2@mail.com|
+|Cc|Receivers sent by copy. They must be separated by commas|cc@mail.com, cc2@mail.com|
+|Bcc|Receivers sent by copy hidden. They must be separated by commas|bcc@mail.com, bcc2@mail.com|
+|Subject|Message subject|New mail|
+|Body|Body of the message. Can be use html labels|Hi from Rocketbot!|
+|Attached File|Path of the file that we want to attach|C:\User\Desktop\test.txt|
+|Folder (Multiple files)|Path of the folder with the files we want to attach|C:\User\Desktop\Files|
 
-### Lista todos los email
+### List all email
   
-Lista todos los email, se puede especificar un filtro
-|Parámetros|Descripción|ejemplo|
+List all email, you can specify a filter
+|Parameters|Description|example|
 | --- | --- | --- |
-|Filtro|Puedes usar todas las opciones de filtro de gmail.|subject:COMPRA|
-|Carpeta|Carpeta desde donde se desa listar todos los emails|INBOX|
-|Sesión|Nombre de la sesión que se va a usar|session1|
-|Ordenar por||{}|
-|Asignar a variable|Nombre de la variable donde se guardará la lista de email|Variable|
+|Filter|You can use all options of filters from gmail|subject:SCHOOL|
+|Folder|Folder where all emails are listed|INBOX|
+|Session|Name of session will be used|session1|
+|Order by|Sort the listed emails by the desired parameter|New first|
+|Asign to var|Name of the variable where the email list will be saved|Variable|
 
-### Lista emails no leídos
+### List unread emails
   
-Lista emails no leídos, se puede especificar un filtro
-|Parámetros|Descripción|ejemplo|
+List unread emails, you can specify a filter
+|Parameters|Description|example|
 | --- | --- | --- |
-|Filtro|Puedes usar todas las opciones de filtro de gmail|subject:COMPRA|
-|Carpeta|Especificar nombre de la carpeta desde donde se quiere obtener los emails, por defecto inbox|inbox|
-|Sesión|Nombre de la sesión que va a usar|session1|
-|Ordenar por||{}|
-|Asignar a variable|Nombre de la variable donde se guardará la lista de email|Variable|
+|Filter|You can use all gmail filter options|subject:SCHOOL|
+|Folder|Specify the name of the folder from where you want to get the emails, by default inbox|inbox|
+|Session|Name of the session to use|session1|
+|Order by|Sort the listed emails by the desired parameter|New first|
+|Asign to var|Name of the variable where the email list will be saved|Variable|
 
-### Leer email por ID
+### Read email for ID
   
-Se puede especifiacar el ID de un email para leerlo
-|Parámetros|Descripción|ejemplo|
+You can specify the ID of an email to read it
+|Parameters|Description|example|
 | --- | --- | --- |
-|ID del email|Id obtenido en los comandos para listar email|345|
-|Sesión|Nombre de la sesión que va a usar|session1|
-|Asignar a variable|Nombre de la variable donde se guardará el contenido del mail leído|Variable|
-|Ruta para descargar adjuntos|Ruta de la carpeta donde se guardarán los archivos adjuntos|C:\User\Desktop|
+|Email ID|Id obtained in the commands to list email|345|
+|Session|Name of the session to use|session1|
+|Asign to var|Name of the variable where the content of the read mail will be saved|Variable|
+|Path for download attachment|Path of the folder where the attachments will be saved|C:\User\Desktop|
 
-### Crear Etiqueta
+### Create Label
   
-Se puede crear una etiqueta con el nombre que desees
-|Parámetros|Descripción|ejemplo|
+You can create a label with the name you want
+|Parameters|Description|example|
 | --- | --- | --- |
-|Nombre Etiqueta|Nombre de la etiqueta a crear|Ingrese nombre de la etiqueta|
-|Sesión|Nombre de la sesión que va a usar|session1|
+|Label Name|Name of the tag to create|Enter the name of the tag|
+|Session|Name of the session to use|session1|
 
-### Mover email a etiqueta
+### Move email to label
   
-Mover email de una etiqueta a otra
-|Parámetros|Descripción|ejemplo|
+Move email from one label to another
+|Parameters|Description|example|
 | --- | --- | --- |
-|ID del email|ID obtenido en los comandos para listar email|Ingrese ID del email|
-|Nombre de la etiqueta|Etiqueta a dónde se moverá el email|test|
-|Sesión|Nombre de la sesión que va a usar|session1|
-|Asignar resultado a variable|Variable donde se guardará. True si se movió el mail. Caso contrario, retomará False|Variable|
+|Email ID|ID obtained in the commands to list email|345|
+|Label Name|Label where the email will be moved to|test|
+|Session|Name of the session to use|session1|
+|Asign result to var|Variable where it will be saved. True if the mail was moved. Otherwise, it will return False|Variable|
 
-### Marcar email como no leído
+### Mark email as unread
   
-Se puede marcar como no leido cualquier email previamente abierto
-|Parámetros|Descripción|ejemplo|
+Any previously opened email can be marked as unread
+|Parameters|Description|example|
 | --- | --- | --- |
-|ID del email|ID obtenido en los comandos para listar email|Ingrese ID del email|
-|Sesión|Nombre de la sesión que va a usar|session1|
+|Email ID|ID obtained in the commands to list email|Enter Email ID|
+|Session|Name of the session to use|session1|
 
-### Cerrar Conexión
+### List all labels
   
-Cierra la conexión del servidor
-|Parámetros|Descripción|ejemplo|
+Get a list of all mail labels and store them in a variable
+|Parameters|Description|example|
 | --- | --- | --- |
-|Sesión|Nombre de la sesión que va a usar|session1|
+|Session|Name of the session to use|session1|
+|Asign to var|Variable where the labels will be saved|Variable|
 
-### Lista todas las etiquetas
+### Forward
   
-Obtiene una lista de todas las etiquetas del mail y las almacena en una variable
-|Parámetros|Descripción|ejemplo|
+Forward an email
+|Parameters|Description|example|
 | --- | --- | --- |
-|Sesión|Nombre de la sesión que va a usar|session1|
-|Asignar a variable|Variable donde se guardaran las etiquetas|Variable|
+|Session|Name of the session to use|session1|
+|ID Mail|ID obtained in the commands to list email|321|
+|To|Message receivers. They must be separated by commas|to@mail.com, to2@mail.com|
+|Cc|Recipients sent by copy. They must be separated by commas|cc@mail.com, cc2@mail.com|
+|Bcc|Recipients sent by hiden copy. They must be separated by commas|bcc@mail.com, bcc2@mail.com|
+|Subject|Message subject|New email|
 
-### Reenviar
+### Download attachments for ID
   
-Reenviar an email
-|Parámetros|Descripción|ejemplo|
+Downloads email attachments and saves them in a folder
+|Parameters|Description|example|
 | --- | --- | --- |
-|Sesión|Nombre de la sesión que va a usar|session1|
-|ID Mail|ID obtenido en los comandos para listar email|321|
-|Para|Destinatarios del mensaje. Deben estar separados por coma|to@mail.com, to2@mail.com|
-|Copia|Destinatarios enviados por copia. Deben estar separados por coma|cc@mail.com, cc2@mail.com|
-|Copia Oculta|Destinatarios enviados por copia oculta. Deben estar separados por coma|bcc@mail.com, bcc2@mail.com|
-|Asunto|Asunto del mensaje|Nuevo mail|
+|Email ID|Email ID to read|345|
+|Session|Gmail session|Default|
+|Path for download attachment|Path where save the attachments|C:/User/Desktop|
 
-### Descargar adjuntos por ID
+### Close Server
   
-Descarga los archivos adjuntos de un correo y los guarda en una carpeta
-|Parámetros|Descripción|ejemplo|
+Close server connection
+|Parameters|Description|example|
 | --- | --- | --- |
-|ID del email|ID del email a leer|345|
-|Sesión|Sesión de Gmail|Default|
-|Ruta para descargar adjuntos|Ruta donde se guardarán los adjuntos|C:/User/Desktop|
+|Session|Name of the session to use|session1|
