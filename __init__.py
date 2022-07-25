@@ -125,16 +125,7 @@ def create_message(sender, to_, cc_, bcc_, subject_, message_text, filenames_):
         print('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e)
         
         
-def user_timezone(str_date):
-    # Date to user timezone
-    dt_str = str_date
-    format = "%Y-%m-%d %H:%M:%S"
-    dt_utc = datetime.strptime(dt_str, format)
-    dt_utc = dt_utc.replace(tzinfo=pytz.UTC)
-    local_zone = tz.tzlocal()
-    dt_local = dt_utc.astimezone(local_zone)
-    local_time_str = dt_local.strftime(format)
-    return local_time_str
+
 
 
 class GmailSuite:
@@ -429,9 +420,16 @@ if module == "read_mail":
         links = [{a.get_text(): a["href"] for a in bs_mail.find_all("a") if "href" in a}]
 
 
+        # Date to user timezone
+        dt_str = mail_.date.__str__()
+        format = "%Y-%m-%d %H:%M:%S"
+        dt_utc = datetime.strptime(dt_str, format)
+        dt_utc = dt_utc.replace(tzinfo=pytz.UTC)
+        local_zone = tz.tzlocal()
+        dt_local = dt_utc.astimezone(local_zone)
+        local_time_str = dt_local.strftime(format)
 
-
-        final = {"date": user_timezone(mail_.date.__str__()), 'subject': mail_.subject,
+        final = {"date": local_time_str, 'subject': mail_.subject,
                  'from': ", ".join([b for (a, b) in mail_.from_]),
                  'to': ", ".join([b for (a, b) in mail_.to]), 'cc': ", ".join([b for (a, b) in mail_.cc]), 'body': bs,
                  'files': nameFile, 'links': links}
