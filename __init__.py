@@ -25,13 +25,14 @@ Para instalar librerias se debe ingresar por terminal a la carpeta "libs"
 """
 
 import base64
+from datetime import datetime
+from dateutil import tz
+import pytz
 from bs4 import BeautifulSoup
 import email
-from email import encoders
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from email.utils import make_msgid
-import traceback
+
 
 base_path = tmp_global_obj["basepath"]
 cur_path = base_path + 'modules' + os.sep + 'gmail_suite' + os.sep + 'libs' + os.sep
@@ -122,6 +123,9 @@ def create_message(sender, to_, cc_, bcc_, subject_, message_text, filenames_):
     except Exception as e:
         print("Esta fue el error:", e)
         print('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e)
+        
+        
+
 
 
 class GmailSuite:
@@ -376,6 +380,7 @@ if module == "read_mail":
             session = SESSION_DEFAULT
     service = mod_gmail_suite_sessions[session]["service"]
     gmail_suite = mod_gmail_suite_sessions[session]["gmail"]
+    
     try:
 
         message = service.users().messages().get(userId='me', id=id_, format='full').execute()
@@ -414,7 +419,17 @@ if module == "read_mail":
         # bs = BeautifulSoup(mail_.body, 'html.parser').body.get_text()
         links = [{a.get_text(): a["href"] for a in bs_mail.find_all("a") if "href" in a}]
 
-        final = {"date": mail_.date.__str__(), 'subject': mail_.subject,
+
+        # Date to user timezone
+        dt_str = mail_.date.__str__()
+        format = "%Y-%m-%d %H:%M:%S"
+        dt_utc = datetime.strptime(dt_str, format)
+        dt_utc = dt_utc.replace(tzinfo=pytz.UTC)
+        local_zone = tz.tzlocal()
+        dt_local = dt_utc.astimezone(local_zone)
+        local_time_str = dt_local.strftime(format)
+
+        final = {"date": local_time_str, 'subject': mail_.subject,
                  'from': ", ".join([b for (a, b) in mail_.from_]),
                  'to': ", ".join([b for (a, b) in mail_.to]), 'cc': ", ".join([b for (a, b) in mail_.cc]), 'body': bs,
                  'files': nameFile, 'links': links}
