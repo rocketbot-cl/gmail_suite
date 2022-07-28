@@ -103,6 +103,7 @@ Obtenha uma lista de todos os marcadores de correio e armazene-as em uma variáv
 |Parâmetros|Descrição|exemplo|
 | --- | --- | --- |
 |Sessão|Nome da sessão a ser usada|session1|
+|Listar todos os dados|Obtém id, nome, visibilidade, etc. Se estiver desmarcado, ele só obtém o id|True|
 |Atribuir à variável|Variável onde os marcadores serão salvos|Variável|
 
 ### Reenviar

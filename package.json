@@ -1138,8 +1138,8 @@
             },
             "title": {
               "es": "Listar todos los datos",
-              "en": "Listar todos los datos",
-              "pr": "Listar todos los datos"
+              "en": "List all data",
+              "pr": "Listar todos os dados"
             },
             "help":{
               "es": "Obtiene id, nombre, visibilidad, etc. Si se desmarca, solo obtiene el id",

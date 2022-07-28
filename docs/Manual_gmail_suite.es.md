@@ -103,6 +103,7 @@ Obtiene una lista de todas las etiquetas del mail y las almacena en una variable
 |Parámetros|Descripción|ejemplo|
 | --- | --- | --- |
 |Sesión|Nombre de la sesión que va a usar|session1|
+|Listar todos los datos|Marca si deseas obtener todos los datos de las etiquetas tales como id, nombre, visibilidad, etc. Si no se marca, solo se obtendrá el id.|True|
 |Asignar a variable|Variable donde se guardaran las etiquetas|Variable|
 
 ### Reenviar
