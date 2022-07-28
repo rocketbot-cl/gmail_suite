@@ -542,6 +542,7 @@ if module == "close":
 
 if module == "listLabels":
     var_ = GetParams('var_')
+    full_data = GetParams('full_data')
     try:
         session = GetParams("session")
         if not session:
@@ -551,8 +552,12 @@ if module == "listLabels":
         #service = build('gmail', 'v1', credentials=gmail_suite.credentials)
         labels = service.users().labels().list(userId='me').execute()
         label_id_list = []
+        print(full_data)
         for label in labels['labels']:
-            label_id_list.append(label['id'])
+            if full_data == 'True':
+                label_id_list.append(label)
+            else:
+                label_id_list.append(label['id'])
         SetVar(var_, label_id_list)
     except Exception as e:
         print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
