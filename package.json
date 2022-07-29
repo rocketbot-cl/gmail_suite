@@ -1125,6 +1125,31 @@
             "css": "col-md-6"
           },
           {
+            "type": "checkbox",
+            "description": {
+              "es": "Marca si deseas obtener todos los datos de las etiquetas tales como id, nombre, visibilidad, etc. Si no se marca, solo se obtendrá el id.",
+              "en": "Check if you want to get all the tag data such as id, name, visibility, etc. If it is not checked, only the id will be obtained.",
+              "pr": "Verifique se você deseja obter todos os dados da tag, como id, nome, visibilidade etc. Se não estiver marcado, apenas o id será obtido."
+            },
+            "placeholder": {
+              "es": "True",
+              "en": "True",
+              "pr": "True"
+            },
+            "title": {
+              "es": "Listar todos los datos",
+              "en": "List all data",
+              "pr": "Listar todos os dados"
+            },
+            "help":{
+              "es": "Obtiene id, nombre, visibilidad, etc. Si se desmarca, solo obtiene el id",
+              "en": "Gets id, name, visibility, etc. If it is unchecked, it only gets the id",
+              "pr": "Obtém id, nome, visibilidade, etc. Se estiver desmarcado, ele só obtém o id"
+            },
+            "id": "full_data",
+            "css": "col-md-6"
+          },
+          {
             "type": "input",
             "description": {
               "es": "Variable donde se guardaran las etiquetas",

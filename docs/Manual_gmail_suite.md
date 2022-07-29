@@ -166,6 +166,7 @@ Get a list of all mail labels and store them in a variable
 |Parameters|Description|example|
 | --- | --- | --- |
 |Session|Name of the session to use|session1|
+|List all data|Check if you want to get all the tag data such as id, name, visibility, etc. If it is not checked, only the id will be obtained.|True|
 |Asign to var|Variable where the labels will be saved|Variable|
 
 ### Forward
