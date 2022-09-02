@@ -1343,6 +1343,11 @@
               "en": "Subject:",
               "pr": "Assunto:"
             },
+            "help": {
+              "es": "Opcional. Si no se agrega nada, se reenviará con el asunto original.",
+              "en": "Optional. If nothing is added, it will be forwarded with the original subject.",
+              "pr": "Opcional. Se nada for acrescentado, será encaminhado com o assunto original."
+            },
             "id": "subject",
             "css": "col-md-12"
           }
