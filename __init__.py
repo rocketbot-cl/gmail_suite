@@ -377,6 +377,11 @@ if module == "read_mail":
         msg_str = base64.urlsafe_b64decode(mime_message['raw'].encode("utf-8")).decode("utf-8")
         mail_ = mailparser.parse_from_string(msg_str)
         nameFile = []
+        
+        for att in mail_.attachments:
+            name_ = att['filename']
+            name_ = name_.replace("\r\n", '')
+            nameFile.append(name_)
 
         if "parts" in message['payload']:
             for part in message['payload']['parts']:
