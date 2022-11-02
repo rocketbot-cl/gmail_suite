@@ -360,7 +360,7 @@ def list_test(value):
 
 
 def dict_test(value):
-    return isinstance(value, (dict, collections.MutableMapping))
+    return isinstance(value, (dict, collections.UserDict))
 
 
 try:
