@@ -228,6 +228,8 @@ if module == "send_mail":
                 f = os.path.join(files, f)
 
                 filenames.append(f)
+        if not body_:
+            body_ = ""
 
         msg = create_message(gmail_suite.user_id, to, cc, bcc, subject, body_, filenames)
         sent = service.users().messages().send(userId='me', body=msg).execute()
