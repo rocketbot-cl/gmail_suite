@@ -2,9 +2,9 @@
   "author": "Danilo Toro",
   "description": "Módulo para realizar acciones en Gmail",
   "disclaimer": "THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM “AS IS” WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM IS WITH YOU. SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING, REPAIR OR CORRECTION.",
-  "version": "2.1",
+  "version": "2.1.1",
   "license": "MIT",
-  "homepage": "http://rocketbot.co/",
+  "homepage": "http://rocketbot.com/",
   "linux": true,
   "windows": true,
   "mac": true,
@@ -280,7 +280,7 @@
             "css": "col-md-12"
           },
           {
-            "type": "input",
+            "type": "textarea",
             "description": {
               "es": "Cuerpo del mail. Se pueden usar etiquetas html",
               "en": "Body of the message. Can be use html labels",
@@ -933,14 +933,39 @@
               "pr": "Marcador para onde o e-mail será movido"
             },
             "placeholder": {
-              "es": "test",
-              "en": "test",
-              "pr": "test"
+              "es": "new",
+              "en": "new",
+              "pr": "new"
             },
             "title": {
               "es": "Nombre de la etiqueta:",
               "en": "Label Name:",
               "pr": "Nome do marcador:"
+            },
+            "id": "label_",
+            "css": "col-md-12"
+          },
+          {
+            "type": "input",
+            "description": {
+              "es": "Etiqueta a quitar del email (Opcional)",
+              "en": "Label to remove from email (Optional)",
+              "pr": "Marcador a ser removido do e-mail (opcional)"
+            },
+            "placeholder": {
+              "es": "old",
+              "en": "old",
+              "pr": "old"
+            },
+            "title": {
+              "es": "Nombre de la etiqueta:",
+              "en": "Label Name:",
+              "pr": "Nome do marcador:"
+            },
+            "help":{
+              "es": "Si no se especifica se removera INBOX. En caso de ser otra el correo mantendra ambas etiquetas.",
+              "en": "If not specified, INBOX will be removed. In case of being another, the mail will keep both labels.",
+              "pr": "Se não for especificado, INBOX será removido. No caso de ser outro, o correio manterá ambas as etiquetas."
             },
             "id": "label_",
             "css": "col-md-12"
