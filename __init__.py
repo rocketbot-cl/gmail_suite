@@ -46,10 +46,10 @@ cur_path = base_path + 'modules' + os.sep + 'gmail_suite' + os.sep + 'libs' + os
 cur_path_x64 = os.path.join(cur_path, 'Windows' + os.sep +  'x64' + os.sep)
 cur_path_x86 = os.path.join(cur_path, 'Windows' + os.sep +  'x86' + os.sep)
 
-if sys.maxsize > 2**32:
-    sys.path.append(cur_path_x64)
-else:
-    sys.path.append(cur_path_x86)
+if sys.maxsize > 2**32 and cur_path_x64 not in sys.path:
+        sys.path.append(cur_path_x64)
+if sys.maxsize > 32 and cur_path_x86 not in sys.path:
+        sys.path.append(cur_path_x86)
 
 from mailparser import mailparser
 from googleapiclient.discovery import build
@@ -122,7 +122,6 @@ def create_message(sender, to_, cc_, bcc_, subject_, message_text, filenames_):
         message['bcc'] = bcc_
         message['from'] = sender
         message['subject'] = subject_
-<<<<<<< HEAD
 
         body = message_text.replace("\n", "<br>")
         
@@ -149,9 +148,6 @@ def create_message(sender, to_, cc_, bcc_, subject_, message_text, filenames_):
                 image.add_header("Content-Transfer-Encoding", "base64")
                 message.attach(image)
 
-=======
-        
->>>>>>> a887071e15b0c8995dbc3a75d90599caeb092f2f
         for file in filenames_:
             filename_ = os.path.basename(file)
             attach_file = open(file, 'rb')
@@ -416,8 +412,6 @@ if module == "read_mail":
         msg_str = base64.urlsafe_b64decode(mime_message['raw'].encode("utf-8")).decode("utf-8")
         mail_ = mailparser.parse_from_string(msg_str)
         nameFile = []
-        
-<<<<<<< HEAD
     
         for att in mail_.attachments:
             # print('Content-id: ', att['content-id'])
@@ -430,9 +424,7 @@ if module == "read_mail":
             
             with open(path, 'wb') as f:
                 f.write(file_data)
-=======
-        for att in mail_.attachments:
->>>>>>> a887071e15b0c8995dbc3a75d90599caeb092f2f
+
             name_ = att['filename']
             name_ = name_.replace("\r\n", '')
             nameFile.append(name_)
