@@ -28,20 +28,30 @@ import base64
 from datetime import datetime
 from dateutil import tz
 import pytz
+import re
 from bs4 import BeautifulSoup
 import email
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-
+from email.utils import make_msgid
+from email.mime.image import MIMEImage
+import pickle
+import os.path
+import os
 
 base_path = tmp_global_obj["basepath"]
 cur_path = base_path + 'modules' + os.sep + 'gmail_suite' + os.sep + 'libs' + os.sep
-if cur_path not in sys.path:
-    sys.path.append(cur_path)
+
+    
+cur_path_x64 = os.path.join(cur_path, 'Windows' + os.sep +  'x64' + os.sep)
+cur_path_x86 = os.path.join(cur_path, 'Windows' + os.sep +  'x86' + os.sep)
+
+if sys.maxsize > 2**32 and cur_path_x64 not in sys.path:
+        sys.path.append(cur_path_x64)
+if sys.maxsize > 32 and cur_path_x86 not in sys.path:
+        sys.path.append(cur_path_x86)
 
 from mailparser import mailparser
-import pickle
-import os.path
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
@@ -96,18 +106,48 @@ def get_msg_attach(file):
         fp.close()
     return msg
 
+global get_regex_group
+def get_regex_group(regex, string):
+    matches = re.finditer(regex, string, re.MULTILINE)
+    return [[group for group in match.groups()] for match in matches]
 
 def create_message(sender, to_, cc_, bcc_, subject_, message_text, filenames_):
     try:
-        global get_msg_attach, MIMEMultipart, MIMEText, base64
-        message = MIMEMultipart()
-        message.attach(MIMEText(message_text, 'html'))
+        global make_msgid, get_msg_attach, MIMEMultipart, MIMEText, base64
+        message = MIMEMultipart('related')
+        message['Message-ID'] = make_msgid()
+                
         message['to'] = to_
         message['cc'] = cc_
         message['bcc'] = bcc_
         message['from'] = sender
         message['subject'] = subject_
+
+        body = message_text.replace("\n", "<br>")
         
+        if not "src" in body:
+            message.attach(MIMEText(body, 'html'))
+        else:
+            for match in get_regex_group(r"src=\"(.*)\"", body):
+                path = match[0]
+                
+                if path.startswith(("http", "https")):
+                    message.attach(MIMEText(body, 'html'))
+                    continue
+
+                image_cid = make_msgid()
+                body = body.replace(path, "cid:" + image_cid[1:-1])
+
+                message.attach(MIMEText(body, 'html'))
+                
+                img_ = open(path, 'rb')
+                image = MIMEImage(img_.read())
+                img_.close()
+                image.add_header('Content-ID', image_cid)
+                image.add_header('Content-Disposition', 'inline', filename=os.path.basename(path))
+                image.add_header("Content-Transfer-Encoding", "base64")
+                message.attach(image)
+
         for file in filenames_:
             filename_ = os.path.basename(file)
             attach_file = open(file, 'rb')
@@ -125,10 +165,6 @@ def create_message(sender, to_, cc_, bcc_, subject_, message_text, filenames_):
         print("Esta fue el error:", e)
         print('Error on line {}'.format(sys.exc_info()[-1].tb_lineno), type(e).__name__, e)
         
-        
-
-
-
 class GmailSuite:
     global InstalledAppFlow, pickle, Request
 
@@ -189,12 +225,11 @@ if module == "conf_mail":
     try:
         path = GetParams("path")
         var_ = GetParams("var_")
-        email = GetParams("from")
+        email_ = GetParams("from")
         session = GetParams("session")
         if not session:
             session = SESSION_DEFAULT
-        print(session)
-        gmail_suite = GmailSuite(path, email, session)
+        gmail_suite = GmailSuite(path, email_, session)
         service = build('gmail', 'v1', credentials=gmail_suite.get_credentials(session))
         mod_gmail_suite_sessions[session] = {
                 "service": service,
@@ -233,8 +268,6 @@ if module == "send_mail":
 
         msg = create_message(gmail_suite.user_id, to, cc, bcc, subject, body_, filenames)
         sent = service.users().messages().send(userId='me', body=msg).execute()
-
-        print('Message Id: %s' % sent['id'])
 
     except Exception as e:
         print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
@@ -332,7 +365,6 @@ if module == "forward":
         PrintException()
         raise e
 
-
 if module == "get_unread":
     filter_ = GetParams('filtro')
     var_ = GetParams('var_')
@@ -380,25 +412,23 @@ if module == "read_mail":
         msg_str = base64.urlsafe_b64decode(mime_message['raw'].encode("utf-8")).decode("utf-8")
         mail_ = mailparser.parse_from_string(msg_str)
         nameFile = []
-        
+    
         for att in mail_.attachments:
+            # print('Content-id: ', att['content-id'])
+            if not att['content-id']:
+                continue
+            file_data = base64.urlsafe_b64decode(att['payload'].encode('utf-8'))
+            if not att_folder.endswith("/"):
+                att_folder += "/"
+            path = ''.join([att_folder, att['filename']])
+            
+            with open(path, 'wb') as f:
+                f.write(file_data)
+
             name_ = att['filename']
             name_ = name_.replace("\r\n", '')
             nameFile.append(name_)
 
-        if "parts" in message['payload']:
-            for part in message['payload']['parts']:
-                if part['filename'] and part['body'] and part['body']['attachmentId'] and att_folder:
-                    attachment = service.users().messages().attachments().get(id=part['body']['attachmentId'],
-                                                                              userId='me', messageId=id_).execute()
-
-                    file_data = base64.urlsafe_b64decode(attachment['data'].encode('utf-8'))
-                    if not att_folder.endswith("/"):
-                        att_folder += "/"
-                    path = ''.join([att_folder, part['filename']])
-
-                    with open(path, 'wb') as f:
-                        f.write(file_data)
 
         bs = ""
         bs_mail = BeautifulSoup(mail_.body, 'html.parser')
@@ -468,6 +498,7 @@ if module == "move_mail":
     # imap = GetGlobals('email')
     id_ = GetParams("id_")
     label_ = GetParams("label_")
+    label_remove = GetParams("label_remove")
     var = GetParams("var")
     session = GetParams("session")
     if not session:
@@ -493,11 +524,13 @@ if module == "move_mail":
                 break
 
         # Create body, add label and remove from inbox
-
         if label is not None:
+            
+            label_remove = label_remove if label_remove is not None else "INBOX"
+            
             body = {
                 "addLabelIds": [label["id"]],
-                "removeLabelIds": ["INBOX"]
+                "removeLabelIds": [label_remove]
             }
             service.users().messages().modify(userId='me', id=id_, body=body).execute()
             SetVar(var, True)
@@ -549,7 +582,6 @@ if module == "listLabels":
         #service = build('gmail', 'v1', credentials=gmail_suite.credentials)
         labels = service.users().labels().list(userId='me').execute()
         label_id_list = []
-        print(full_data)
         for label in labels['labels']:
             if full_data == 'True':
                 label_id_list.append(label)
