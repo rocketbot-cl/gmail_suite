@@ -967,7 +967,7 @@
               "en": "If not specified, INBOX will be removed. In case of being another, the mail will keep both labels.",
               "pr": "Se não for especificado, INBOX será removido. No caso de ser outro, o correio manterá ambas as etiquetas."
             },
-            "id": "label_",
+            "id": "label_remove",
             "css": "col-md-12"
           },
           {
