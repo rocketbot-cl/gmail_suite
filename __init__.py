@@ -498,7 +498,7 @@ if module == "move_mail":
     # imap = GetGlobals('email')
     id_ = GetParams("id_")
     label_ = GetParams("label_")
-    label_remove = GetParams("label_remove")
+    label_remove_ = GetParams("label_remove")
     var = GetParams("var")
     session = GetParams("session")
     if not session:
@@ -518,19 +518,21 @@ if module == "move_mail":
         labels = service.users().labels().list(userId='me').execute()["labels"]
 
         label = None
+        label_remove = None
         for lbl in labels:
+            print(lbl)
             if lbl["name"] == label_:
                 label = lbl
-                break
+            if lbl["name"] == label_remove_:
+                label_remove = lbl
 
         # Create body, add label and remove from inbox
         if label is not None:
-            
             label_remove = label_remove if label_remove is not None else "INBOX"
-            
+            print(label_remove)
             body = {
                 "addLabelIds": [label["id"]],
-                "removeLabelIds": [label_remove]
+                "removeLabelIds": [label_remove["id"]]
             }
             service.users().messages().modify(userId='me', id=id_, body=body).execute()
             SetVar(var, True)
