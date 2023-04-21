@@ -1,2 +1,0 @@
-Mon Jun 6 15:02:10 2022  (origin/master, origin/HEAD, master) [fix] send mail: attached txt file send
-Mon Feb 7 11:16:46 2022  [hidden] merge conflicts fixed

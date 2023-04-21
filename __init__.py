@@ -38,6 +38,7 @@ from email.mime.image import MIMEImage
 import pickle
 import os.path
 import os
+import sys
 
 base_path = tmp_global_obj["basepath"]
 cur_path = base_path + 'modules' + os.sep + 'gmail_suite' + os.sep + 'libs' + os.sep
@@ -365,6 +366,70 @@ if module == "forward":
         PrintException()
         raise e
 
+if module == "respond":
+    id_ = GetParams('id_mail')
+    session = GetParams('session')
+    to = GetParams('to')
+    cc = GetParams('cc')
+    bcc = GetParams('bcc')
+    subject = GetParams('subject')
+
+
+    if not id_:
+        raise Exception("No mail id")
+    if not session:
+        session = SESSION_DEFAULT
+    
+    # Assigns session
+    service = mod_gmail_suite_sessions[session]["service"]
+    gmail_suite = mod_gmail_suite_sessions[session]["gmail"]
+    
+    try:
+        # Retrieve email from GMAIL API in raw format
+        mime_message = service.users().messages().get(userId='me', id=id_, format='raw').execute()
+
+        # Take the raw email and decodes it
+        msg_str = base64.urlsafe_b64decode(mime_message['raw'].encode("utf-8")).decode("utf-8")
+        
+        # Take the decoded raw email and converts into Email object
+        mime_message = email.message_from_string(msg_str)
+
+        # Create a new email object
+        message = MIMEMultipart()
+        # Attach the email to forward
+        message.attach(mime_message)
+        # Asign the email values
+        message['to'] = f"{mime_message['To']}, {to}"
+        message['cc'] = cc
+        message['bcc'] = bcc
+        message['from'] = gmail_suite.user_id
+        if not subject:
+            message['subject'] = 'Re: ' + mime_message['Subject']
+        else:
+            message['subject'] = subject
+
+        # Convert the email to base64
+        message = base64.urlsafe_b64encode(message.as_bytes())
+        msg = {
+            "raw": message.decode("utf-8")
+        }
+        
+        # Send the email
+        service.users().messages().send(userId='me', body=msg).execute()
+        
+        # Mark the email as read
+        body = {
+            "removeLabelIds": ['UNREAD']
+        }
+
+        service.users().messages().modify(userId='me', id=id_, body=body).execute()
+
+    except Exception as e:
+        
+        print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
+        PrintException()
+        raise e
+
 if module == "get_unread":
     filter_ = GetParams('filtro')
     var_ = GetParams('var_')
@@ -420,7 +485,9 @@ if module == "read_mail":
             file_data = base64.urlsafe_b64decode(att['payload'].encode('utf-8'))
             if not att_folder.endswith("/"):
                 att_folder += "/"
-            path = ''.join([att_folder, att['filename']])
+                
+            filename = re.sub(r'[\\/*?:"<>|]', '',part['filename'])
+            path = ''.join([att_folder, filename])
             
             with open(path, 'wb') as f:
                 f.write(file_data)
@@ -471,7 +538,6 @@ if module == "read_mail":
         print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
         PrintException()
         raise e
-
 
 if module == "create_folder":
     try:
@@ -618,7 +684,8 @@ if module == "get_attachments":
                     file_data = base64.urlsafe_b64decode(attachment['data'].encode('utf-8'))
                     if not att_folder.endswith("/"):
                         att_folder += "/"
-                    path = ''.join([att_folder, part['filename']])
+                    filename = re.sub(r'[\\/*?:"<>|]', '',part['filename'])
+                    path = ''.join([att_folder, filename])
 
                     with open(path, 'wb') as f:
                         f.write(file_data)

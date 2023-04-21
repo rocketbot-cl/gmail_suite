@@ -59,6 +59,3 @@ In the menu on the left, when you click on **Consent screen**, if you have a cor
 ![](imgs/externo.png)
 
 To prevent committing every week, you can publish the app for google approval and you can use it indefinitely.
-
-
----
