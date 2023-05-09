@@ -1,7 +1,3 @@
-
-
-
-
 # Gmail G Suite
   
 Conecte-se por meio da API do Google à sua conta do Gmail, leia, envie e gerencie sua caixa de entrada de e-mail, marcadores e pastas.  
@@ -17,7 +13,6 @@ Para instalar o módulo no Rocketbot Studio, pode ser feito de duas formas:
 
 # Como usar este modulo
 
-*Read this in other languages: [English](how_to_use.md), [Portugues](how_to_use.pr.md), [Español](how_to_use.es.md).*
 
 Para trabalhar com este módulo é necessário ativar a API do Gmail. Para isso, você deve seguir os seguintes passos.
 * Ir para o [Google Console](https://console.cloud.google.com/projectcreate?previousPage=%2Fhome%2Fdashboard%3Fproject%3Dprueba-312216%26hl%3Des&folder=&organizationId=777182023349&hl=es) para criar um novo projeto (caso já tenha criado, pule esta etapa) e preencha os dados indicados no formulário
@@ -152,7 +147,7 @@ Mover e-mail de um marcador para outro
 | --- | --- | --- |
 |ID do email|ID obtido nos comandos para listar email|345|
 |Nome do marcador|Marcador para onde o e-mail será movido|new|
-|Nome do marcador|Marcador a ser removido do e-mail (opcional)|old|
+|Nome do marcador a ser removido|Marcador a ser removido do e-mail (opcional)|old|
 |Sesión|Nome da sessão a ser usada|session1|
 |Atribuir resultado à variável|Variável onde será salvo. True se o email foi movido. Caso contrário, retornará False|variável|
 
@@ -176,6 +171,18 @@ Obtenha uma lista de todos os marcadores de correio e armazene-as em uma variáv
 ### Reenviar
   
 Reenviar um email
+|Parâmetros|Descrição|exemplo|
+| --- | --- | --- |
+|Sessão|Nome da sessão a ser usada|session1|
+|ID Mail|ID obtido nos comandos para listar email|321|
+|Para|Destinatários da mensagem. Devem ser separados por vírgulas|to@mail.com, to2@mail.com|
+|Cópia|Destinatários enviados por cópia. Devem ser separados por vírgulas|cc@mail.com, cc2@mail.com|
+|Cópia oculta|Destinatários enviados por cópia oculta. Devem ser separados por vírgulas|bcc@mail.com, bcc2@mail.com|
+|Assunto|Assunto da mensagem|Novo email|
+
+### Responder email
+  
+Este comando permite responder um email por seu ID
 |Parâmetros|Descrição|exemplo|
 | --- | --- | --- |
 |Sessão|Nome da sessão a ser usada|session1|

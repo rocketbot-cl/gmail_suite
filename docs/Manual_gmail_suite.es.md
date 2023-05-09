@@ -1,7 +1,3 @@
-
-
-
-
 # Gmail G Suite
   
 Conéctese a través de la API de Google a su cuenta de Gmail, lea, envíe y administre su bandeja de entrada, etiquetas y carpetas de correo electrónico.  
@@ -17,7 +13,6 @@ Para instalar el módulo en Rocketbot Studio, se puede hacer de dos formas:
 
 # Como usar este modulo
 
-*Read this in other languages: [English](how_to_use.md), [Portugues](how_to_use.pr.md), [Español](how_to_use.es.md).*
 
 Para trabajar con este modulo es necesario activar la API de gmail. Para esto, debes seguir los siguientes pasos.
 * Ir a [Consola de Google](https://console.cloud.google.com/projectcreate?previousPage=%2Fhome%2Fdashboard%3Fproject%3Dprueba-312216%26hl%3Des&folder=&organizationId=777182023349&hl=es) para crear un nuevo proyecto (Si ya tienes uno creado, omita este paso) y complete los datos indicados en el formulario
@@ -152,7 +147,7 @@ Mover email de una etiqueta a otra
 | --- | --- | --- |
 |ID del email|ID obtenido en los comandos para listar email|345|
 |Nombre de la etiqueta|Etiqueta a dónde se moverá el email|new|
-|Nombre de la etiqueta|Etiqueta a quitar del email (Opcional)|old|
+|Nombre de la etiqueta a quitar|Etiqueta a quitar del email (Opcional)|old|
 |Sesión|Nombre de la sesión que va a usar|session1|
 |Asignar resultado a variable|Variable donde se guardará. True si se movió el mail. Caso contrario, retomará False|Variable|
 
@@ -176,6 +171,18 @@ Obtiene una lista de todas las etiquetas del mail y las almacena en una variable
 ### Reenviar
   
 Reenviar un email
+|Parámetros|Descripción|ejemplo|
+| --- | --- | --- |
+|Sesión|Nombre de la sesión que va a usar|session1|
+|ID Mail|ID obtenido en los comandos para listar email|321|
+|Para|Destinatarios del mensaje. Deben estar separados por coma|to@mail.com, to2@mail.com|
+|Copia|Destinatarios enviados por copia. Deben estar separados por coma|cc@mail.com, cc2@mail.com|
+|Copia Oculta|Destinatarios enviados por copia oculta. Deben estar separados por coma|bcc@mail.com, bcc2@mail.com|
+|Asunto|Asunto del mensaje|Nuevo mail|
+
+### Responder email
+  
+Este comando permite responder un email por su ID
 |Parámetros|Descripción|ejemplo|
 | --- | --- | --- |
 |Sesión|Nombre de la sesión que va a usar|session1|
