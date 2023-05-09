@@ -586,7 +586,7 @@ if module == "move_mail":
         label = None
         label_remove = None
         for lbl in labels:
-            print(lbl)
+
             if lbl["name"] == label_:
                 label = lbl
             if lbl["name"] == label_remove_:
@@ -595,10 +595,9 @@ if module == "move_mail":
         # Create body, add label and remove from inbox
         if label is not None:
             label_remove = label_remove if label_remove is not None else "INBOX"
-            print(label_remove)
             body = {
                 "addLabelIds": [label["id"]],
-                "removeLabelIds": [label_remove["id"]]
+                "removeLabelIds": [label_remove["id"] if label_remove != "INBOX" else "INBOX"]
             }
             service.users().messages().modify(userId='me', id=id_, body=body).execute()
             SetVar(var, True)
@@ -633,7 +632,7 @@ if module == "markAsUnread":
 if module == "close":
     session = GetParams("session")
     if not session:
-            session = SESSION_DEFAULT
+        session = SESSION_DEFAULT
     mod_gmail_suite_sessions[session]["service"] = None
     mod_gmail_suite_sessions[session]["gmail"] = None
 

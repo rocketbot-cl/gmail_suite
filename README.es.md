@@ -1,7 +1,3 @@
-
-
-
-
 # Gmail G Suite
   
 Conéctese a través de la API de Google a su cuenta de Gmail, lea, envíe y administre su bandeja de entrada, etiquetas y carpetas de correo electrónico.  
@@ -48,10 +44,13 @@ Obtiene una lista de todas las etiquetas del mail y las almacena en una variable
 10. Reenviar  
 Reenviar un email
 
-11. Descargar adjuntos por ID  
+11. Responder email  
+Este comando permite responder un email por su ID
+
+12. Descargar adjuntos por ID  
 Descarga los archivos adjuntos de un correo y los guarda en una carpeta
 
-12. Cerrar Conexión  
+13. Cerrar Conexión  
 Cierra la conexión del servidor  
 
 

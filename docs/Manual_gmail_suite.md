@@ -1,7 +1,3 @@
-
-
-
-
 # Gmail G Suite
   
 Connect through Google API to your Gmail account, read, send and manage your email inbox, labels and folders.  
@@ -17,7 +13,6 @@ To install the module in Rocketbot Studio, it can be done in two ways:
 
 # How to use
 
-*Read this in other languages: [English](how_to_use.md), [Portugues](how_to_use.pr.md), [Español](how_to_use.es.md).*
 
 ## Obtaining credentials:
 To work with this module it is necessary to activate the gmail API. For this, you must follow the following steps.
@@ -152,7 +147,7 @@ Move email from one label to another
 | --- | --- | --- |
 |Email ID|ID obtained in the commands to list email|345|
 |Label Name|Label where the email will be moved to|new|
-|Label Name|Label to remove from email (Optional)|old|
+|Label Name to remove|Label to remove from email (Optional)|old|
 |Session|Name of the session to use|session1|
 |Asign result to var|Variable where it will be saved. True if the mail was moved. Otherwise, it will return False|Variable|
 
@@ -176,6 +171,18 @@ Get a list of all mail labels and store them in a variable
 ### Forward
   
 Forward an email
+|Parameters|Description|example|
+| --- | --- | --- |
+|Session|Name of the session to use|session1|
+|ID Mail|ID obtained in the commands to list email|321|
+|To|Message receivers. They must be separated by commas|to@mail.com, to2@mail.com|
+|Cc|Recipients sent by copy. They must be separated by commas|cc@mail.com, cc2@mail.com|
+|Bcc|Recipients sent by hiden copy. They must be separated by commas|bcc@mail.com, bcc2@mail.com|
+|Subject|Message subject|New email|
+
+### Reply email
+  
+This command allows you to reply to an email by its ID
 |Parameters|Description|example|
 | --- | --- | --- |
 |Session|Name of the session to use|session1|

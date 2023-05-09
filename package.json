@@ -7,7 +7,7 @@
     "pr": "Conecte-se por meio da API do Google à sua conta do Gmail, leia, envie e gerencie sua caixa de entrada de e-mail, marcadores e pastas."
   },
   "disclaimer": "THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM “AS IS” WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM IS WITH YOU. SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING, REPAIR OR CORRECTION.",
-  "version": "3.5.3",
+  "version": "3.6.3",
   "license": "MIT",
   "homepage": "http://rocketbot.com/",
   "linux": true,
@@ -130,6 +130,7 @@
               "en": "Variable name without {}",
               "pr": "Nome da variável sem {}"
             },
+            "remove_vars": true,
             "id": "var_",
             "css": "col-md-6"
           }
@@ -509,6 +510,7 @@
               "en": "Var name whitout {}",
               "pr": "Nome da variável sem {}"
             },
+            "remove_vars": true,
             "id": "var_",
             "css": "col-md-12"
           }
@@ -672,6 +674,7 @@
               "en": "Var name whitout {}",
               "pr": "Nome da variável sem {}"
             },
+            "remove_vars": true,
             "id": "var_",
             "css": "col-md-12"
           }
@@ -774,6 +777,7 @@
               "en": "Var name whitout {}",
               "pr": "Nome da variável sem {}"
             },
+            "remove_vars": true,
             "id": "var_",
             "css": "col-md-6"
           },
@@ -964,9 +968,9 @@
               "pr": "old"
             },
             "title": {
-              "es": "Nombre de la etiqueta:",
-              "en": "Label Name:",
-              "pr": "Nome do marcador:"
+              "es": "Nombre de la etiqueta a quitar:",
+              "en": "Label Name to remove:",
+              "pr": "Nome do marcador a ser removido:"
             },
             "help":{
               "es": "Si no se especifica se removera INBOX. En caso de ser otra el correo mantendra ambas etiquetas.",
@@ -1018,6 +1022,7 @@
               "en": "Var name without {}",
               "pr": "Nome da variável sem {}"
             },
+            "remove_vars": true,
             "id": "var",
             "css": "col-md-12"
           }
@@ -1202,6 +1207,7 @@
               "en": "Var name whitout {}",
               "pr": "Nome da variável sem {}"
             },
+            "remove_vars": true,
             "id": "var_",
             "css": "col-md-12"
           }
@@ -1399,20 +1405,20 @@
     },
     {
       "en": {
-        "title": "Respond",
-        "description": "Respond an email",
+        "title": "Reply email",
+        "description": "This command allows you to reply to an email by its ID",
         "title_options": "Select Option",
         "options": null
       },
       "es": {
-        "title": "Respondes",
-        "description": "Responder un email",
+        "title": "Responder email",
+        "description": "Este comando permite responder un email por su ID",
         "title_options": "Seleccione una opción",
         "options": null
       },
       "pr": {
-        "title": "Responder",
-        "description": "Responder um email",
+        "title": "Responder email",
+        "description": "Este comando permite responder um email por seu ID",
         "title_options": "Selecione uma opção",
         "options": null
       },

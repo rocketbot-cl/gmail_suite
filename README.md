@@ -1,7 +1,3 @@
-
-
-
-
 # Gmail G Suite
   
 Connect through Google API to your Gmail account, read, send and manage your email inbox, labels and folders.  
@@ -48,10 +44,13 @@ Get a list of all mail labels and store them in a variable
 10. Forward  
 Forward an email
 
-11. Download attachments for ID  
+11. Reply email  
+This command allows you to reply to an email by its ID
+
+12. Download attachments for ID  
 Downloads email attachments and saves them in a folder
 
-12. Close Server  
+13. Close Server  
 Close server connection  
 
 

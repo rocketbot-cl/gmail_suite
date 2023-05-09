@@ -1,7 +1,3 @@
-
-
-
-
 # Gmail G Suite
   
 Conecte-se por meio da API do Google à sua conta do Gmail, leia, envie e gerencie sua caixa de entrada de e-mail, marcadores e pastas.  
@@ -48,10 +44,13 @@ Obtenha uma lista de todos os marcadores de correio e armazene-as em uma variáv
 10. Reenviar  
 Reenviar um email
 
-11. Baixar anexos por ID  
+11. Responder email  
+Este comando permite responder um email por seu ID
+
+12. Baixar anexos por ID  
 Baixe anexos de e-mail e salve-os em uma pasta
 
-12. Fechar conexão  
+13. Fechar conexão  
 Feche a conexão do servidor  
 
 
