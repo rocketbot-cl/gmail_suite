@@ -1,15 +1,14 @@
 # Gmail G Suite
   
-Module to perform actions in Gmail 
+Connect through Google API to your Gmail account, read, send and manage your email inbox, labels and folders.  
 
-*Read this in other languages: [English](README.md), [Portugues](README.pr.md), [Español](README.es.md).*
-
-*How to use: [English](/docs/how_to_use.md), [Portugues](/docs/how_to_use.pr.md), [Español](/docs/how_to_use.es.md).*
+*Read this in other languages: [English](README.md), [Português](README.pr.md), [Español](README.es.md)*
 
 ## How to install this module
   
-__Download__ and __install__ the content in 'modules' folder in Rocketbot path  
-
+To install the module in Rocketbot Studio, it can be done in two ways:
+1. Manual: __Download__ the .zip file and unzip it in the modules folder. The folder name must be the same as the module and inside it must have the following files and folders: \__init__.py, package.json, docs, example and libs. If you have the application open, refresh your browser to be able to use the new module.
+2. Automatic: When entering Rocketbot Studio on the right margin you will find the **Addons** section, select **Install Mods**, search for the desired module and press install.  
 
 
 ## Overview
@@ -45,11 +44,16 @@ Get a list of all mail labels and store them in a variable
 10. Forward  
 Forward an email
 
-11. Download attachments for ID  
+11. Reply email  
+This command allows you to reply to an email by its ID
+
+12. Download attachments for ID  
 Downloads email attachments and saves them in a folder
 
-12. Close Server  
+13. Close Server  
 Close server connection  
+
+
 
 
 ----
@@ -61,7 +65,7 @@ Close server connection
 - docker
 
 ### Dependencies
-- [**mail-parser**](https://pypi.org/project/mail-parser/)
+- [**mail-parser**](https://pypi.org/project/mail-parser/)- [**google-api-python-client**](https://pypi.org/project/google-api-python-client/)
 ### License
   
 ![MIT](https://camo.githubusercontent.com/107590fac8cbd65071396bb4d04040f76cde5bde/687474703a2f2f696d672e736869656c64732e696f2f3a6c6963656e73652d6d69742d626c75652e7376673f7374796c653d666c61742d737175617265)  

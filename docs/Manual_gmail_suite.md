@@ -1,20 +1,18 @@
 # Gmail G Suite
   
-Module to perform actions in Gmail
+Connect through Google API to your Gmail account, read, send and manage your email inbox, labels and folders.  
 
-*Read this in other languages: [English](Manual_gmail_suite.md), [Portugues](Manual_gmail_suite.pr.md), [Español](Manual_gmail_suite.es.md).*
-
-*How to use: [English](/docs/how_to_use.md), [Portugues](/docs/how_to_use.pr.md), [Español](/docs/how_to_use.es.md).*
+*Read this in other languages: [English](Manual_gmail_suite.md), [Português](Manual_gmail_suite.pr.md), [Español](Manual_gmail_suite.es.md)*
   
-![banner](/docs/imgs/Banner_gmail_suite.png)
+![banner](imgs/Banner_gmail_suite.png)
 ## How to install this module
   
-__Download__ and __install__ the content in 'modules' folder in Rocketbot path  
-
+To install the module in Rocketbot Studio, it can be done in two ways:
+1. Manual: __Download__ the .zip file and unzip it in the modules folder. The folder name must be the same as the module and inside it must have the following files and folders: \__init__.py, package.json, docs, example and libs. If you have the application open, refresh your browser to be able to use the new module.
+2. Automatic: When entering Rocketbot Studio on the right margin you will find the **Addons** section, select **Install Mods**, search for the desired module and press install.  
 
 # How to use
 
-*Read this in other languages: [English](how_to_use.md), [Portugues](how_to_use.pr.md), [Español](how_to_use.es.md).*
 
 ## Obtaining credentials:
 To work with this module it is necessary to activate the gmail API. For this, you must follow the following steps.
@@ -26,7 +24,8 @@ In the top bar you will see the name of the project. If it is not displayed, cha
 
 ![](imgs/seleccionarproyecto.png)
 
-If you get the message "You do not have sufficient permissions to view this page." As shown in the image above, click on **API and Services** on the left panel, and after switching to the page, click on **ENABLE API AND SERVICES**
+If you get the message "You do not have sufficient permissions to view this page." As shown in the image above, click on **API and Services** on the left panel, and after 
+switching to the page, click on **ENABLE API AND SERVICES**
 
 ![](imgs/habilitarapiyservicios.png)
 
@@ -50,6 +49,7 @@ On the consent screen, type a name for the app and select an email.
 
 On the permissions screen, click **ADD OR REMOVE PERMISSIONS**. A modal will open to select the permissions. In the filter type **Gmail API**, click on the dropdown menu **Rows per page** and select **100** to see all the options, select all by checking **API**, then click on * *Update**
 
+
 ![](imgs/agregarpermisos.png)
 
 ![](imgs/actualizar.png)
@@ -72,10 +72,8 @@ In the menu on the left, when you click on **Consent screen**, if you have a cor
 
 ![](imgs/externo.png)
 
-To prevent committing every week, you can publish the app for google approval and you can use it indefinitely.
-
-
-
+To prevent committing every week, you can 
+publish the app for google approval and you can use it indefinitely.
 ## Description of the commands
 
 ### Server Configuration
@@ -148,7 +146,8 @@ Move email from one label to another
 |Parameters|Description|example|
 | --- | --- | --- |
 |Email ID|ID obtained in the commands to list email|345|
-|Label Name|Label where the email will be moved to|test|
+|Label Name|Label where the email will be moved to|new|
+|Label Name to remove|Label to remove from email (Optional)|old|
 |Session|Name of the session to use|session1|
 |Asign result to var|Variable where it will be saved. True if the mail was moved. Otherwise, it will return False|Variable|
 
@@ -172,6 +171,18 @@ Get a list of all mail labels and store them in a variable
 ### Forward
   
 Forward an email
+|Parameters|Description|example|
+| --- | --- | --- |
+|Session|Name of the session to use|session1|
+|ID Mail|ID obtained in the commands to list email|321|
+|To|Message receivers. They must be separated by commas|to@mail.com, to2@mail.com|
+|Cc|Recipients sent by copy. They must be separated by commas|cc@mail.com, cc2@mail.com|
+|Bcc|Recipients sent by hiden copy. They must be separated by commas|bcc@mail.com, bcc2@mail.com|
+|Subject|Message subject|New email|
+
+### Reply email
+  
+This command allows you to reply to an email by its ID
 |Parameters|Description|example|
 | --- | --- | --- |
 |Session|Name of the session to use|session1|

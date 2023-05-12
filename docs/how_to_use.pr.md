@@ -59,5 +59,3 @@ No menu à esquerda, ao clicar em **Tela de consentimento**, caso você tenha um
 ![](imgs/externo.png)
 
 Para evitar cometer todas as semanas, você pode publicar o aplicativo para aprovação do Google e usá-lo indefinidamente.
-
----

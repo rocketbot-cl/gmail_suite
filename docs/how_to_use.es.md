@@ -59,5 +59,3 @@ En el menú de la izquierda, al dar click en **Pantalla de consentimiento**, si 
 ![](imgs/externo.png)
 
 Para prevenir confirmar cada semana, puedes publicar la aplicación para que google la apruebe y puedas usarla indefinidamente.
-
----
