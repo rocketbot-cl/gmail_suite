@@ -479,15 +479,19 @@ if module == "read_mail":
         nameFile = []
     
         for att in mail_.attachments:
-            # print('Content-id: ', att['content-id'])
-            if not att['content-id']:
-                continue
+            try:
+                if not att['content-id'] and not att['content-disposition']:
+                    print('No content-id and content-disposition')
+                    continue
+            except:
+                if not att['content-id']:
+                    print('No content-id')
+                    continue
+
             file_data = base64.urlsafe_b64decode(att['payload'].encode('utf-8'))
             if not att_folder.endswith("/"):
-                att_folder += "/"
-                
-            filename = re.sub(r'[\\/*?:"<>|]', '',part['filename'])
-            path = ''.join([att_folder, filename])
+                att_folder += "/"  
+            path = ''.join([att_folder, att['filename']])
             
             with open(path, 'wb') as f:
                 f.write(file_data)
