@@ -1,3 +1,7 @@
+
+
+
+
 # Gmail G Suite
   
 Conecte-se por meio da API do Google à sua conta do Gmail, leia, envie e gerencie sua caixa de entrada de e-mail, marcadores e pastas.  
@@ -29,28 +33,31 @@ Listar e-mails não lidos, você pode especificar um filtro
 5. Ler email por ID  
 Você pode especificar o ID de um email para lê-lo
 
-6. Criar marcador  
+6. Obter thread por ID  
+Obtenha todo o tópico de um e-mail por ID
+
+7. Criar marcador  
 Você pode criar uma marcador com o nome que quiser
 
-7. Mover e-mail para marcador  
+8. Mover e-mail para marcador  
 Mover e-mail de um marcador para outro
 
-8. Marcar e-mail como não lido  
+9. Marcar e-mail como não lido  
 Qualquer email aberto anteriormente pode ser marcado como não lido
 
-9. Listar todos os marcadores  
+10. Listar todos os marcadores  
 Obtenha uma lista de todos os marcadores de correio e armazene-as em uma variável
 
-10. Reenviar  
+11. Reenviar  
 Reenviar um email
 
-11. Responder email  
+12. Responder email  
 Este comando permite responder um email por seu ID
 
-12. Baixar anexos por ID  
+13. Baixar anexos por ID  
 Baixe anexos de e-mail e salve-os em uma pasta
 
-13. Fechar conexão  
+14. Fechar conexão  
 Feche a conexão do servidor  
 
 

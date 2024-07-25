@@ -1,3 +1,7 @@
+
+
+
+
 # Gmail G Suite
   
 Conéctese a través de la API de Google a su cuenta de Gmail, lea, envíe y administre su bandeja de entrada, etiquetas y carpetas de correo electrónico.  
@@ -29,28 +33,31 @@ Lista emails no leídos, se puede especificar un filtro
 5. Leer email por ID  
 Se puede especificar el ID de un email para leerlo
 
-6. Crear Etiqueta  
+6. Obtener hilo por ID  
+Obtener el hilo completo de un correo electrónico por ID
+
+7. Crear Etiqueta  
 Se puede crear una etiqueta con el nombre que desees
 
-7. Mover email a etiqueta  
+8. Mover email a etiqueta  
 Mover email de una etiqueta a otra
 
-8. Marcar email como no leído  
+9. Marcar email como no leído  
 Se puede marcar como no leido cualquier email previamente abierto
 
-9. Lista todas las etiquetas  
+10. Lista todas las etiquetas  
 Obtiene una lista de todas las etiquetas del mail y las almacena en una variable
 
-10. Reenviar  
+11. Reenviar  
 Reenviar un email
 
-11. Responder email  
+12. Responder email  
 Este comando permite responder un email por su ID
 
-12. Descargar adjuntos por ID  
+13. Descargar adjuntos por ID  
 Descarga los archivos adjuntos de un correo y los guarda en una carpeta
 
-13. Cerrar Conexión  
+14. Cerrar Conexión  
 Cierra la conexión del servidor  
 
 

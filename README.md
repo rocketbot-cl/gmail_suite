@@ -1,3 +1,7 @@
+
+
+
+
 # Gmail G Suite
   
 Connect through Google API to your Gmail account, read, send and manage your email inbox, labels and folders.  
@@ -29,28 +33,31 @@ List unread emails, you can specify a filter
 5. Read email for ID  
 You can specify the ID of an email to read it
 
-6. Create Label  
+6. Get thread by ID  
+Get the whole thread of an email by ID
+
+7. Create Label  
 You can create a label with the name you want
 
-7. Move email to label  
+8. Move email to label  
 Move email from one label to another
 
-8. Mark email as unread  
+9. Mark email as unread  
 Any previously opened email can be marked as unread
 
-9. List all labels  
+10. List all labels  
 Get a list of all mail labels and store them in a variable
 
-10. Forward  
+11. Forward  
 Forward an email
 
-11. Reply email  
+12. Reply email  
 This command allows you to reply to an email by its ID
 
-12. Download attachments for ID  
+13. Download attachments for ID  
 Downloads email attachments and saves them in a folder
 
-13. Close Server  
+14. Close Server  
 Close server connection  
 
 
