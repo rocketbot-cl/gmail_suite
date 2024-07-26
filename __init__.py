@@ -173,8 +173,8 @@ class GmailSuite:
     SCOPES = ['https://mail.google.com/', 'https://www.googleapis.com/auth/gmail.send',
               'https://www.googleapis.com/auth/gmail.readonly']
 
-    def __init__(self, credentials_path, user_id, session):
-        self.credentials = self.set_credentials(credentials_path, session)
+    def __init__(self, credentials_path, user_id, session, port):
+        self.credentials = self.set_credentials(credentials_path, session, port)
         self.user_id = user_id
 
     #@property
@@ -228,11 +228,11 @@ if module == "conf_mail":
         var_ = GetParams("var_")
         email_ = GetParams("from")
         session = GetParams("session")
-        port = 0 if not GetParams("port") else eval(GetParams("port"))
+        port = 8080 if not GetParams("port") else eval(GetParams("port"))
         
         if not session:
             session = SESSION_DEFAULT
-        gmail_suite = GmailSuite(path, email_, session)
+        gmail_suite = GmailSuite(path, email_, session, port)
         service = build('gmail', 'v1', credentials=gmail_suite.get_credentials(session))
         mod_gmail_suite_sessions[session] = {
                 "service": service,
