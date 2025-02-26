@@ -173,8 +173,8 @@ class GmailSuite:
     SCOPES = ['https://mail.google.com/', 'https://www.googleapis.com/auth/gmail.send',
               'https://www.googleapis.com/auth/gmail.readonly']
 
-    def __init__(self, credentials_path, user_id, session):
-        self.credentials = self.set_credentials(credentials_path, session)
+    def __init__(self, credentials_path, user_id, session, port):
+        self.credentials = self.set_credentials(credentials_path, session, port)
         self.user_id = user_id
 
     #@property
@@ -189,7 +189,7 @@ class GmailSuite:
         #return self._credentials
 
     #@credentials.setter
-    def set_credentials(self, credentials_path, session):
+    def set_credentials(self, credentials_path, session, port):
 
         try:
             """Shows basic usage of the Gmail API.
@@ -210,7 +210,7 @@ class GmailSuite:
                 else:
                     flow = InstalledAppFlow.from_client_secrets_file(
                         credentials_path, self.SCOPES)
-                    creds = flow.run_local_server(port=0)
+                    creds = flow.run_local_server(port=port)
                 # Save the credentials for the next run
                 with open(session_pickle, 'wb') as token:
                     pickle.dump(creds, token)
@@ -228,9 +228,11 @@ if module == "conf_mail":
         var_ = GetParams("var_")
         email_ = GetParams("from")
         session = GetParams("session")
+        port = 8080 if not GetParams("port") else eval(GetParams("port"))
+        
         if not session:
             session = SESSION_DEFAULT
-        gmail_suite = GmailSuite(path, email_, session)
+        gmail_suite = GmailSuite(path, email_, session, port)
         service = build('gmail', 'v1', credentials=gmail_suite.get_credentials(session))
         mod_gmail_suite_sessions[session] = {
                 "service": service,
@@ -252,6 +254,7 @@ if module == "send_mail":
     attached_file = GetParams('attached_file')
     files = GetParams('attached_folder')
     session = GetParams("session")
+    var_ = GetParams("var_")
     if not session:
             session = SESSION_DEFAULT
     service = mod_gmail_suite_sessions[session]["service"]
@@ -269,7 +272,8 @@ if module == "send_mail":
 
         msg = create_message(gmail_suite.user_id, to, cc, bcc, subject, body_, filenames)
         sent = service.users().messages().send(userId='me', body=msg).execute()
-
+        
+        SetVar(var_, {"id":sent["id"], "threadId":sent["threadId"]})
     except Exception as e:
         print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
         PrintException()
@@ -281,6 +285,8 @@ if module == "get_mail":
     label_id = GetParams('label_id')
     session = GetParams("session")
     order_by = GetParams("order_by")
+    thread = GetParams("thread")
+    
     if not session:
             session = SESSION_DEFAULT
     try:
@@ -291,7 +297,10 @@ if module == "get_mail":
         
         list_ = []
         if "messages" in mails:
-            list_ = [mail["id"] for mail in mails["messages"]]
+            if thread and eval(thread):
+                list_ = [{"id":mail["id"], "threadId":mail["threadId"]} for mail in mails["messages"]]
+            else:
+                list_ = [mail["id"] for mail in mails["messages"]]
         
         if order_by == "old":
             list_ = list_[::-1]
@@ -515,7 +524,7 @@ if module == "read_mail":
             bs = "\n".join(html_list)
 
         # bs = BeautifulSoup(mail_.body, 'html.parser').body.get_text()
-        links = [{a.get_text(): a["href"] for a in bs_mail.find_all("a") if "href" in a}]
+        links = [{a.get_text(): a["href"] for a in bs_mail.find_all("a")}]
 
 
         # Date to user timezone
@@ -538,6 +547,29 @@ if module == "read_mail":
         }
 
         message = service.users().messages().modify(userId='me', id=id_, body=body).execute()
+    except Exception as e:
+        print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
+        PrintException()
+        raise e
+
+if module == "mail_thread":
+    id_ = GetParams('id_')
+    var_ = GetParams('var_')
+    format = GetParams('format')
+    session = GetParams("session")
+    if not session:
+            session = SESSION_DEFAULT
+    service = mod_gmail_suite_sessions[session]["service"]
+    gmail_suite = mod_gmail_suite_sessions[session]["gmail"]
+    
+    try:
+
+        if not format:
+            format = "full"
+        
+        thread = service.users().threads().get(userId='me', id=id_, format=format).execute()
+        
+        SetVar(var_, thread)
     except Exception as e:
         print("\x1B[" + "31;40mAn error occurred\x1B[" + "0m")
         PrintException()

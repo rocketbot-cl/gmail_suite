@@ -1,3 +1,7 @@
+
+
+
+
 # Gmail G Suite
   
 Connect through Google API to your Gmail account, read, send and manage your email inbox, labels and folders.  
@@ -13,6 +17,7 @@ To install the module in Rocketbot Studio, it can be done in two ways:
 
 # How to use
 
+*Read this in other languages: [English](how_to_use.md), [Portugues](how_to_use.pr.md), [Español](how_to_use.es.md).*
 
 ## Obtaining credentials:
 To work with this module it is necessary to activate the gmail API. For this, you must follow the following steps.
@@ -82,6 +87,7 @@ Configure the mail server to be used
 |Parameters|Description|example|
 | --- | --- | --- |
 |Credentials|Path of the json file donwloaded in the previus step |credentials.json|
+|Port (Optional)||8080|
 |User|Email that will be used to send emails. It can be blank if you will not send emails|user@example.com|
 |Session|Name of the sesion we are going to asign|session1|
 |Assign result to a Variable|Result of the connection|Variable|
@@ -99,6 +105,7 @@ Send email, before you must configurate the server
 |Body|Body of the message. Can be use html labels|Hi from Rocketbot!|
 |Attached File|Path of the file that we want to attach|C:\User\Desktop\test.txt|
 |Folder (Multiple files)|Path of the folder with the files we want to attach|C:\User\Desktop\Files|
+|Assign result to a Variable|Result of the connection|Variable|
 
 ### List all email
   
@@ -107,8 +114,9 @@ List all email, you can specify a filter
 | --- | --- | --- |
 |Filter|You can use all options of filters from gmail|subject:SCHOOL|
 |Folder|Folder where all emails are listed|INBOX|
-|Session|Name of session will be used|session1|
 |Order by|Sort the listed emails by the desired parameter|New first|
+|Thread ID|Check to get message thread id|True|
+|Session|Name of session will be used|session1|
 |Asign to var|Name of the variable where the email list will be saved|Variable|
 
 ### List unread emails
@@ -131,6 +139,16 @@ You can specify the ID of an email to read it
 |Session|Name of the session to use|session1|
 |Asign to var|Name of the variable where the content of the read mail will be saved|Variable|
 |Path for download attachment|Path of the folder where the attachments will be saved|C:\User\Desktop|
+
+### Get thread by ID
+  
+Get the whole thread of an email by ID
+|Parameters|Description|example|
+| --- | --- | --- |
+|Thread ID|Id obtained in the commands to list email|345|
+|Format|Format of the returned data|Full|
+|Session|Name of the session to use|session1|
+|Asign to var|Name of the variable where the content of the read mail will be saved|Variable|
 
 ### Create Label
   

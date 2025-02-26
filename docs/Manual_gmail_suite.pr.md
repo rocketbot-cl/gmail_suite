@@ -1,3 +1,7 @@
+
+
+
+
 # Gmail G Suite
   
 Conecte-se por meio da API do Google à sua conta do Gmail, leia, envie e gerencie sua caixa de entrada de e-mail, marcadores e pastas.  
@@ -13,6 +17,7 @@ Para instalar o módulo no Rocketbot Studio, pode ser feito de duas formas:
 
 # Como usar este modulo
 
+*Read this in other languages: [English](how_to_use.md), [Portugues](how_to_use.pr.md), [Español](how_to_use.es.md).*
 
 Para trabalhar com este módulo é necessário ativar a API do Gmail. Para isso, você deve seguir os seguintes passos.
 * Ir para o [Google Console](https://console.cloud.google.com/projectcreate?previousPage=%2Fhome%2Fdashboard%3Fproject%3Dprueba-312216%26hl%3Des&folder=&organizationId=777182023349&hl=es) para criar um novo projeto (caso já tenha criado, pule esta etapa) e preencha os dados indicados no formulário
@@ -82,6 +87,7 @@ Configure o servidor de email a ser usado
 |Parâmetros|Descrição|exemplo|
 | --- | --- | --- |
 |Credenciais|Caminho do arquivo json baixado na etapa anterior|credentials.json|
+|Porto (Opcional)||8080|
 |Usuário|E-mail que será usado para enviar e-mails. Pode ficar em branco se você não quiser enviar e-mail|user@example.com|
 |Sessão|Nome da sessão que vamos atribuir|session1|
 |Atribuir resultado à variável|Resultado da conexão|Variável|
@@ -99,6 +105,7 @@ Envia um email, você deve configurar previamente o servidor
 |Mensagem|Corpo do e-mail. tags html podem ser usadas|Hi from Rocketbot!|
 |Arquivo anexo|Caminho do arquivo a ser anexado|C:\User\Desktop\test.txt|
 |Pasta (vários arquivos)|Caminho da pasta com os arquivos a serem anexados|C:\User\Desktop\Files|
+|Atribuir resultado à variável|Resultado da conexão|Variável|
 
 ### Listar todos os e-mails
   
@@ -107,8 +114,9 @@ Liste todos os e-mails, você pode especificar um filtro
 | --- | --- | --- |
 |Filtro|Você pode usar todas as opções de filtro do Gmail.|subject:ESCOLA|
 |Pasta|Pasta de onde todos os emails não estão listados|INBOX|
-|Sessão|Nome da sessão a ser usada|session1|
 |Organizar por|Classifique os emails listados pelo parâmetro desejado|New first|
+|ID do tópico|Verifique para obter o ID do tópico da mensagem|True|
+|Sessão|Nome da sessão a ser usada|session1|
 |Atribuir à variável|Nome da variável onde a lista de e-mail será salva|Variável|
 
 ### Lista de e-mail não lida
@@ -131,6 +139,16 @@ Você pode especificar o ID de um email para lê-lo
 |Sessão|Nome da sessão a ser usada|session1|
 |Atribuir à variável|Nome da variável onde o conteúdo do e-mail lido será salvo|variável|
 |Caminho para baixar anexos|Caminho da pasta onde os anexos serão salvos|C:\User\Desktop|
+
+### Obter thread por ID
+  
+Obtenha todo o tópico de um e-mail por ID
+|Parâmetros|Descrição|exemplo|
+| --- | --- | --- |
+|ID do tópico|Id obtido nos comandos para listar email|345|
+|Formato|Formato dos dados retornados|Full|
+|Sessão|Nome da sessão a ser usada|session1|
+|Atribuir à variável|Nome da variável onde o conteúdo do e-mail lido será salvo|variável|
 
 ### Criar marcador
   

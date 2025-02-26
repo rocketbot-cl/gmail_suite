@@ -1,3 +1,7 @@
+
+
+
+
 # Gmail G Suite
   
 Conéctese a través de la API de Google a su cuenta de Gmail, lea, envíe y administre su bandeja de entrada, etiquetas y carpetas de correo electrónico.  
@@ -13,6 +17,7 @@ Para instalar el módulo en Rocketbot Studio, se puede hacer de dos formas:
 
 # Como usar este modulo
 
+*Read this in other languages: [English](how_to_use.md), [Portugues](how_to_use.pr.md), [Español](how_to_use.es.md).*
 
 Para trabajar con este modulo es necesario activar la API de gmail. Para esto, debes seguir los siguientes pasos.
 * Ir a [Consola de Google](https://console.cloud.google.com/projectcreate?previousPage=%2Fhome%2Fdashboard%3Fproject%3Dprueba-312216%26hl%3Des&folder=&organizationId=777182023349&hl=es) para crear un nuevo proyecto (Si ya tienes uno creado, omita este paso) y complete los datos indicados en el formulario
@@ -82,6 +87,7 @@ Configurar el servidor del mail que se va a usar
 |Parámetros|Descripción|ejemplo|
 | --- | --- | --- |
 |Credenciales|Ruta del archivo json descargado en el paso anterior|credentials.json|
+|Puerto (Opcional)||8080|
 |Usuario|Email que se usará para enviar correos. Puede estar en blanco si no enviarás emails.|user@example.com|
 |Sesión|Nombre de la sesión que le vamos a asignar|session1|
 |Asignar resultado a Variable|Resultado de la conexion|Variable|
@@ -99,6 +105,7 @@ Envia un email, previamente debe configurar el servidor
 |Mensaje|Cuerpo del mail. Se pueden usar etiquetas html|Hi from Rocketbot!|
 |Archivo Adjunto|Ruta del archivo que se desea adjuntar|C:\User\Desktop\test.txt|
 |Carpeta (Varios archivos)|Ruta de la carpeta con los archivos que se desea adjuntar|C:\User\Desktop\Files|
+|Asignar resultado a Variable|Resultado de la conexion|Variable|
 
 ### Lista todos los email
   
@@ -107,8 +114,9 @@ Lista todos los email, se puede especificar un filtro
 | --- | --- | --- |
 |Filtro|Puedes usar todas las opciones de filtro de gmail.|subject:ESCUELA|
 |Carpeta|Carpeta desde donde se desea listar todos los emails|INBOX|
-|Sesión|Nombre de la sesión que se va a usar|session1|
 |Ordenar por|Ordena los correos listados por el parámetro deseado|New first|
+|ID de Hilo|Marca para obtener la identificación del hilo del mensaje|True|
+|Sesión|Nombre de la sesión que se va a usar|session1|
 |Asignar a variable|Nombre de la variable donde se guardará la lista de email|Variable|
 
 ### Lista emails no leídos
@@ -131,6 +139,16 @@ Se puede especificar el ID de un email para leerlo
 |Sesión|Nombre de la sesión que va a usar|session1|
 |Asignar a variable|Nombre de la variable donde se guardará el contenido del mail leído|Variable|
 |Ruta para descargar adjuntos|Ruta de la carpeta donde se guardarán los archivos adjuntos|C:\User\Desktop|
+
+### Obtener hilo por ID
+  
+Obtener el hilo completo de un correo electrónico por ID
+|Parámetros|Descripción|ejemplo|
+| --- | --- | --- |
+|ID del hilo|Id obtenido en los comandos para listar email|345|
+|Formato|Formato de los datos devueltos|Full|
+|Sesión|Nombre de la sesión que va a usar|session1|
+|Asignar a variable|Nombre de la variable donde se guardará el contenido del mail leído|Variable|
 
 ### Crear Etiqueta
   
