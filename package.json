@@ -7,7 +7,7 @@
     "pr": "Conecte-se por meio da API do Google à sua conta do Gmail, leia, envie e gerencie sua caixa de entrada de e-mail, marcadores e pastas."
   },
   "disclaimer": "THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM “AS IS” WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM IS WITH YOU. SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING, REPAIR OR CORRECTION.",
-  "version": "3.7.10",
+  "version": "3.7.11",
   "license": "MIT",
   "homepage": "http://rocketbot.com/",
   "linux": true,
@@ -454,6 +454,31 @@
             "id": "filtro",
             "css": "col-md-6"
           },
+          {
+            "type": "input",
+            "placeholder": {
+                "es": "500",
+                "en": "500",
+                "pr": "500"
+            },
+            "title": {
+                "es": "Numero de emails a obtener:",
+                "en": "Number of emails to retrieve:",
+                "pr": "Número de e-mails a obter:"
+            },
+            "help": {
+              "es": "Por defecto 100. Debe colocar un numero entre 1 - 500",
+              "en": "Default: 100. Please enter a number between 1 and 500.",
+              "pr": "Padrão: 100. Insira um número entre 1 e 500"
+            },
+            "description": {
+                "es": "Numero de emails a obtener, por defecto 100, maximo 500.",
+                "en": "Number of emails to retrieve, default 100, maximum 500.",
+                "pr": "Número de e-mails a obter, por padrão 100, máximo 500."
+            },
+            "id": "count",
+            "css": "col-md-6"
+        },
           {
             "type": "input",
             "description": {

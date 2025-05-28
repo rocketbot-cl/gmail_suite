@@ -286,6 +286,8 @@ if module == "get_mail":
     session = GetParams("session")
     order_by = GetParams("order_by")
     thread = GetParams("thread")
+    requested_count_str = GetParams('count')
+    requested_count = int(requested_count_str) if requested_count_str else 100
     
     if not session:
             session = SESSION_DEFAULT
@@ -293,15 +295,31 @@ if module == "get_mail":
         service = mod_gmail_suite_sessions[session]["service"]
         gmail_suite = mod_gmail_suite_sessions[session]["gmail"]
         #service = build('gmail', 'v1', credentials=gmail_suite.credentials)
-        mails = service.users().messages().list(userId='me', q=filter_, labelIds=label_id).execute()
+        #mails = service.users().messages().list(userId='me', q=filter_, labelIds=label_id).execute()
         
         list_ = []
-        if "messages" in mails:
-            if thread and eval(thread):
-                list_ = [{"id":mail["id"], "threadId":mail["threadId"]} for mail in mails["messages"]]
-            else:
-                list_ = [mail["id"] for mail in mails["messages"]]
-        
+        next_page_token = None
+        while True:
+
+            mails = service.users().messages().list(
+                userId='me',
+                q=filter_,
+                labelIds=label_id,
+                pageToken=next_page_token,
+                maxResults=requested_count
+            ).execute()
+
+            if "messages" in mails:
+                if thread and eval(thread):
+                    list_.extend([{"id":mail["id"], "threadId":mail["threadId"]} for mail in mails["messages"]])
+                else:
+                    list_.extend([mail["id"] for mail in mails["messages"]])
+
+            next_page_token = mails.get("nextPageToken")
+            
+            if len(list_) >= requested_count or not next_page_token:
+                break   
+
         if order_by == "old":
             list_ = list_[::-1]
 

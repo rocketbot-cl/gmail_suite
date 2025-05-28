@@ -113,6 +113,7 @@ Liste todos os e-mails, você pode especificar um filtro
 |Parâmetros|Descrição|exemplo|
 | --- | --- | --- |
 |Filtro|Você pode usar todas as opções de filtro do Gmail.|subject:ESCOLA|
+|Número de e-mails a obter|Número de e-mails a obter, por padrão 100, máximo 500.|500|
 |Pasta|Pasta de onde todos os emails não estão listados|INBOX|
 |Organizar por|Classifique os emails listados pelo parâmetro desejado|New first|
 |ID do tópico|Verifique para obter o ID do tópico da mensagem|True|
