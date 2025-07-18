@@ -210,6 +210,7 @@ Este comando permite responder un email por su ID
 |Copia|Destinatarios enviados por copia. Deben estar separados por coma|cc@mail.com, cc2@mail.com|
 |Copia Oculta|Destinatarios enviados por copia oculta. Deben estar separados por coma|bcc@mail.com, bcc2@mail.com|
 |Asunto|Asunto del mensaje|Nuevo mail|
+|Mensaje|Cuerpo del mail.|Hi from Rocketbot!|
 
 ### Descargar adjuntos por ID
   

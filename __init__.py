@@ -400,7 +400,7 @@ if module == "respond":
     cc = GetParams('cc')
     bcc = GetParams('bcc')
     subject = GetParams('subject')
-
+    body_text = GetParams('body')    
 
     if not id_:
         raise Exception("No mail id")
@@ -414,41 +414,42 @@ if module == "respond":
     try:
         # Retrieve email from GMAIL API in raw format
         mime_message = service.users().messages().get(userId='me', id=id_, format='raw').execute()
-
+        #print(mime_message)
+        thread_id = mime_message["threadId"]       
         # Take the raw email and decodes it
-        msg_str = base64.urlsafe_b64decode(mime_message['raw'].encode("utf-8")).decode("utf-8")
-        
+        msg_str = base64.urlsafe_b64decode(mime_message['raw'].encode("utf-8")).decode("utf-8")        
         # Take the decoded raw email and converts into Email object
         mime_message = email.message_from_string(msg_str)
-
+        message_id = mime_message.get('Message-ID', '').strip()
         # Create a new email object
         message = MIMEMultipart()
         # Attach the email to forward
-        message.attach(mime_message)
+        if body_text:
+            message.attach(MIMEText(body_text, 'html'))
         # Asign the email values
-        message['to'] = f"{mime_message['To']}, {to}"
+        message['to'] = f"{mime_message['From']}, {to}" if to else mime_message['From']
         message['cc'] = cc
         message['bcc'] = bcc
-        message['from'] = gmail_suite.user_id
+        message['from'] = gmail_suite.user_id        
+        # Set headers to keep the email in the same thread
+        if id_:
+            message.add_header('In-Reply-To', message_id)
+            message.add_header('References', message_id)
         if not subject:
             message['subject'] = 'Re: ' + mime_message['Subject']
         else:
             message['subject'] = subject
-
         # Convert the email to base64
         message = base64.urlsafe_b64encode(message.as_bytes())
         msg = {
-            "raw": message.decode("utf-8")
-        }
-        
+            "raw": message.decode("utf-8"),
+            'threadId': thread_id
+        }        
         # Send the email
-        service.users().messages().send(userId='me', body=msg).execute()
-        
+        service.users().messages().send(userId='me', body=msg).execute()        
         # Mark the email as read
         body = {
-            "removeLabelIds": ['UNREAD']
-        }
-
+            "removeLabelIds": ['UNREAD']        }
         service.users().messages().modify(userId='me', id=id_, body=body).execute()
 
     except Exception as e:
