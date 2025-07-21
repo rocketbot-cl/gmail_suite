@@ -210,6 +210,7 @@ This command allows you to reply to an email by its ID
 |Cc|Recipients sent by copy. They must be separated by commas|cc@mail.com, cc2@mail.com|
 |Bcc|Recipients sent by hiden copy. They must be separated by commas|bcc@mail.com, bcc2@mail.com|
 |Subject|Message subject|New email|
+|Body|Body of the message. |Hi from Rocketbot!|
 
 ### Download attachments for ID
   
