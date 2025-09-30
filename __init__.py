@@ -543,7 +543,8 @@ if module == "read_mail":
             bs = "\n".join(html_list)
 
         # bs = BeautifulSoup(mail_.body, 'html.parser').body.get_text()
-        links = [{a.get_text(): a["href"] for a in bs_mail.find_all("a")}]
+        #links = [{a.get_text(): a["href"] for a in bs_mail.find_all("a")}]
+        links = [{a.get_text(): a["href"] for a in bs_mail.find_all("a") if a.has_attr("href")}]
 
 
         # Date to user timezone
