@@ -505,28 +505,38 @@ if module == "read_mail":
         msg_str = base64.urlsafe_b64decode(mime_message['raw'].encode("utf-8")).decode("utf-8")
         mail_ = mailparser.parse_from_string(msg_str)
         nameFile = []
-    
+
+        # Always collect attachment names; only download if att_folder is provided
+        if att_folder:
+            os.makedirs(att_folder, exist_ok=True)
+
         for att in mail_.attachments:
             try:
-                if not att['content-id'] and not att['content-disposition']:
+                if not att.get('content-id') and not att.get('content-disposition'):
                     print('No content-id and content-disposition')
                     continue
-            except:
-                if not att['content-id']:
+            except Exception:
+                if not att.get('content-id'):
                     print('No content-id')
                     continue
 
-            file_data = base64.urlsafe_b64decode(att['payload'].encode('utf-8'))
-            if not att_folder.endswith("/"):
-                att_folder += "/"  
-            path = ''.join([att_folder, att['filename']])
-            
-            with open(path, 'wb') as f:
-                f.write(file_data)
+            original_name = (att.get('filename') or 'attachment').replace("\r\n", '')
+            if att_folder:
+                safe_name = re.sub(r'[\\/*?:"<>|]', '', original_name)
+                if not safe_name:
+                    safe_name = 'attachment'
+                nameFile.append(safe_name)
 
-            name_ = att['filename']
-            name_ = name_.replace("\r\n", '')
-            nameFile.append(name_)
+                payload = att.get('payload')
+                if not payload:
+                    continue
+
+                file_data = base64.urlsafe_b64decode(payload.encode('utf-8'))
+                path = os.path.join(att_folder, safe_name)
+                with open(path, 'wb') as f:
+                    f.write(file_data)
+            else:
+                nameFile.append(original_name)
 
 
         bs = ""
