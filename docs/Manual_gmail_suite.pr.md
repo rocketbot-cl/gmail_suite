@@ -211,6 +211,9 @@ Este comando permite responder um email por seu ID
 |Cópia oculta|Destinatários enviados por cópia oculta. Devem ser separados por vírgulas|bcc@mail.com, bcc2@mail.com|
 |Assunto|Assunto da mensagem|Novo email|
 |Mensagem|Corpo do e-mail.|Hi from Rocketbot!|
+|Arquivo anexo|Caminho do arquivo a ser anexado|C:\User\Desktop\test.txt|
+|Pasta (vários arquivos)|Caminho da pasta com os arquivos a serem anexados|C:\User\Desktop\Files|
+|Lista de Arquivos (opcional)|Permite anexar vários arquivos informando caminhos manualmente|C:/tmp/a.pdf;C:/tmp/b.xlsx|
 
 ### Baixar anexos por ID
   

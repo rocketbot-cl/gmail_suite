@@ -25,6 +25,7 @@ Para instalar librerias se debe ingresar por terminal a la carpeta "libs"
 """
 
 import base64
+import ast
 from datetime import datetime
 from dateutil import tz
 import pytz
@@ -111,6 +112,57 @@ global get_regex_group
 def get_regex_group(regex, string):
     matches = re.finditer(regex, string, re.MULTILINE)
     return [[group for group in match.groups()] for match in matches]
+
+
+def normalize_attachment_paths(*values):
+    paths = []
+
+    for value in values:
+        if value is None:
+            continue
+
+        if isinstance(value, (list, tuple, set)):
+            paths.extend(normalize_attachment_paths(*value))
+            continue
+
+        if not isinstance(value, str):
+            continue
+
+        raw = value.strip()
+        if not raw:
+            continue
+
+        if (raw.startswith('[') and raw.endswith(']')) or (raw.startswith('(') and raw.endswith(')')):
+            try:
+                parsed = ast.literal_eval(raw)
+                if isinstance(parsed, (list, tuple, set)):
+                    paths.extend(normalize_attachment_paths(*parsed))
+                    continue
+            except Exception:
+                pass
+
+        chunks = re.split(r'[\r\n;,]+', raw)
+        for chunk in chunks:
+            cleaned = chunk.strip().strip('"').strip("'")
+            if cleaned:
+                paths.append(cleaned)
+
+    return list(dict.fromkeys(paths))
+
+
+def get_attachment_files(*values):
+    global normalize_attachment_paths
+    files = []
+    for path in normalize_attachment_paths(*values):
+        if os.path.isdir(path):
+            for entry in os.listdir(path):
+                full_path = os.path.join(path, entry)
+                if os.path.isfile(full_path):
+                    files.append(full_path)
+        else:
+            files.append(path)
+
+    return list(dict.fromkeys(files))
 
 def create_message(sender, to_, cc_, bcc_, subject_, message_text, filenames_):
     try:
@@ -400,7 +452,10 @@ if module == "respond":
     cc = GetParams('cc')
     bcc = GetParams('bcc')
     subject = GetParams('subject')
-    body_text = GetParams('body')    
+    body_text = GetParams('body')
+    attached_file = GetParams('attached_file')
+    attached_folder = GetParams('attached_folder')
+    selected_files = GetParams('selected_files')
 
     if not id_:
         raise Exception("No mail id")
@@ -431,6 +486,11 @@ if module == "respond":
         message['cc'] = cc
         message['bcc'] = bcc
         message['from'] = gmail_suite.user_id        
+        for attachment in get_attachment_files(attached_file, attached_folder, selected_files):
+            attach_part = get_msg_attach(attachment)
+            attach_part.add_header('Content-Disposition', 'attachment', filename=os.path.basename(attachment))
+            message.attach(attach_part)
+
         # Set headers to keep the email in the same thread
         if id_:
             message.add_header('In-Reply-To', message_id)
