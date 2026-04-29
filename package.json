@@ -1,13 +1,11 @@
 {
   "author": "Danilo Toro",
-  "description": "Module to work with Gmail | Módulo para trabajar con Gmail",
+  "description": "Module to work with Gmail",
   "description_lang":{
-    "en": "Connect through Google API to your Gmail account, read, send and manage your email inbox, labels and folders.",
-    "es": "Conéctese a través de la API de Google a su cuenta de Gmail, lea, envíe y administre su bandeja de entrada, etiquetas y carpetas de correo electrónico.",
-    "pr": "Conecte-se por meio da API do Google à sua conta do Gmail, leia, envie e gerencie sua caixa de entrada de e-mail, marcadores e pastas."
+    "en": "Connect through Google API to your Gmail account, read, send and manage your email inbox, labels and folders."
   },
   "disclaimer": "THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM “AS IS” WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM IS WITH YOU. SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING, REPAIR OR CORRECTION.",
-  "version": "3.7.14",
+  "version": "3.7.15",
   "license": "MIT",
   "homepage": "http://rocketbot.com/",
   "linux": true,
@@ -52,7 +50,7 @@
             "type": "file_select",
             "description": {
               "es": "Ruta del archivo json descargado en el paso anterior",
-              "en": "Path of the json file donwloaded in the previus step ",
+              "en": "Path to the JSON file downloaded in the previous step",
               "pr": "Caminho do arquivo json baixado na etapa anterior"
             },
             "placeholder": {
@@ -87,7 +85,7 @@
             "type": "input",
             "description": {
               "es": "Email que se usará para enviar correos. Puede estar en blanco si no enviarás emails.",
-              "en": "Email that will be used to send emails. It can be blank if you will not send emails",
+              "en": "Email address that will be used to send emails. It can be left blank if you will not be sending emails.",
               "pr": "E-mail que será usado para enviar e-mails. Pode ficar em branco se você não quiser enviar e-mail"
             },
             "placeholder": {
@@ -107,13 +105,13 @@
             "type": "input",
             "description": {
               "es": "Nombre de la sesión que le vamos a asignar",
-              "en": "Name of the sesion we are going to asign",
+              "en": "Name of the session we are going to assign to you",
               "pr": "Nome da sessão que vamos atribuir"
             },
             "placeholder": {
-              "es": "session1",
+              "es": "sesion1",
               "en": "session1",
-              "pr": "session1"
+              "pr": "sessão1"
             },
             "title": {
               "es": "Sesión:",
@@ -127,7 +125,7 @@
             "type": "input",
             "description": {
               "es": "Resultado de la conexion",
-              "en": "Result of the connection",
+              "en": "Connection result",
               "pr": "Resultado da conexão"
             },
             "placeholder": {
@@ -137,8 +135,8 @@
             },
             "title": {
               "es": "Asignar resultado a Variable:",
-              "en": "Assign result to a Variable:",
-              "pr": "Atribuir resultado à variável"
+              "en": "Assign result to Variable:",
+              "pr": "Atribuir resultado a uma variável:"
             },
             "help": {
               "es": "Nombre de variable sin {}",
@@ -167,7 +165,7 @@
     {
       "en": {
         "title": "Send Email",
-        "description": "Send email, before you must configurate the server",
+        "description": "Send an email, you must first configure the server",
         "title_options": "Select Option",
         "options": null
       },
@@ -190,13 +188,13 @@
             "type": "input",
             "description": {
               "es": "Nombre de la sesión que va a usar.",
-              "en": "Name of the session we will be use",
-              "pr": "Nome da sessão a ser usada"
+              "en": "Name of the session you will use.",
+              "pr": "Nome da sessão a ser usada."
             },
             "placeholder": {
-              "es": "session1",
+              "es": "sesion1",
               "en": "session1",
-              "pr": "session1"
+              "pr": "sessão1"
             },
             "title": {
               "es": "Sesión:",
@@ -209,9 +207,9 @@
           {
             "type": "input",
             "description": {
-              "es": "Destinatarios del mensaje. Deben estar separados por coma",
-              "en": "Message receivers. They must be separated by commas",
-              "pr": "Destinatários da mensagem. Devem ser separados por vírgulas"
+              "es": "Destinatarios del mensaje. Deben estar separados por coma.",
+              "en": "Message recipients. They must be separated by commas.",
+              "pr": "Destinatários da mensagem. Devem ser separados por vírgulas."
             },
             "placeholder": {
               "es": "to@mail.com, to2@mail.com",
@@ -285,7 +283,7 @@
             "type": "input",
             "description": {
               "es": "Asunto del mensaje",
-              "en": "Message subject",
+              "en": "Subject of message",
               "pr": "Assunto da mensagem"
             },
             "placeholder": {
@@ -305,13 +303,13 @@
             "type": "textarea",
             "description": {
               "es": "Cuerpo del mail. Se pueden usar etiquetas html",
-              "en": "Body of the message. Can be use html labels",
-              "pr": "Corpo do e-mail. tags html podem ser usadas"
+              "en": "Email body. HTML tags can be used.",
+              "pr": "Corpo do e-mail. É possível usar tags HTML"
             },
             "placeholder": {
-              "es": "Hi from Rocketbot!",
-              "en": "Hi from Rocketbot!",
-              "pr": "Hi from Rocketbot!"
+              "es": "Hola desde Rocketbot!",
+              "en": "Hello from Rocketbot!",
+              "pr": "Olá, da Rocketbot!"
             },
             "title": {
               "es": "Mensaje:",
@@ -344,9 +342,9 @@
           {
             "type": "folder_select",
             "description": {
-              "es": "Ruta de la carpeta con los archivos que se desea adjuntar",
-              "en": "Path of the folder with the files we want to attach",
-              "pr": "Caminho da pasta com os arquivos a serem anexados"
+              "es": "Ruta de la carpeta con los archivos que se desea adjuntar.",
+              "en": "Path to the folder containing the files you wish to attach.",
+              "pr": "Caminho para a pasta que contém os arquivos que você deseja anexar."
             },
             "placeholder": {
               "es": "C:\\User\\Desktop\\Files",
@@ -361,7 +359,7 @@
             "help": {
               "es": "Para varios adjuntos, ingresar ruta a carpeta",
               "en": "For several attachments, enter folder path",
-              "pr": "Para vários anexos, insira o caminho da pasta"
+              "pr": "Para vários anexos, insira o caminho da pasta."
             },
             "id": "attached_folder",
             "css": "col-md-12"
@@ -447,8 +445,8 @@
               "pr": "Filtro:"
             },
             "help": {
-              "es": "Dejar vacío para traerlos todos",
-              "en": "Empty for get all",
+              "es": "Dejar vacío para traerlos todos.",
+              "en": "Leave empty to bring them all in.",
               "pr": "Deixe vazio para trazê-los todos"
             },
             "id": "filtro",
@@ -463,7 +461,7 @@
             },
             "title": {
                 "es": "Numero de emails a obtener:",
-                "en": "Number of emails to retrieve:",
+                "en": "Number of emails to obtain:",
                 "pr": "Número de e-mails a obter:"
             },
             "help": {
@@ -473,8 +471,8 @@
             },
             "description": {
                 "es": "Numero de emails a obtener, por defecto 100, maximo 500.",
-                "en": "Number of emails to retrieve, default 100, maximum 500.",
-                "pr": "Número de e-mails a obter, por padrão 100, máximo 500."
+                "en": "Number of emails to be retrieved, by default 100, maximum 500.",
+                "pr": "Número de e-mails obtidos, por defeito 100, máximo 500.."
             },
             "id": "count",
             "css": "col-md-6"
@@ -1803,9 +1801,9 @@
               "pr": "Corpo do e-mail."
             },
             "placeholder": {
-              "es": "Hi from Rocketbot!",
+              "es": "Hola desde Rocketbot!",
               "en": "Hi from Rocketbot!",
-              "pr": "Hi from Rocketbot!"
+              "pr": "Olá da Rocketbot!"
             },
             "title": {
               "es": "Mensaje:",
@@ -1813,6 +1811,76 @@
               "pr": "Mensagem:"
             },
             "id": "body",
+            "css": "col-md-12"
+          },
+          {
+            "type": "file_select",
+            "description": {
+              "es": "Ruta del archivo que se desea adjuntar",
+              "en": "Path of the file that we want to attach",
+              "pr": "Caminho do arquivo a ser anexado"
+            },
+            "placeholder": {
+              "es": "C:\\User\\Desktop\\test.txt",
+              "en": "C:\\User\\Desktop\\test.txt",
+              "pr": "C:\\User\\Desktop\\test.txt"
+            },
+            "title": {
+              "es": "Archivo Adjunto:",
+              "en": "Attached File:",
+              "pr": "Arquivo anexo:"
+            },
+            "id": "attached_file",
+            "css": "col-md-12"
+          },
+          {
+            "type": "folder_select",
+            "description": {
+              "es": "Ruta de la carpeta con los archivos que se desea adjuntar",
+              "en": "Path of the folder with the files we want to attach",
+              "pr": "Caminho da pasta com os arquivos a serem anexados"
+            },
+            "placeholder": {
+              "es": "C:\\User\\Desktop\\Files",
+              "en": "C:\\User\\Desktop\\Files",
+              "pr": "C:\\User\\Desktop\\Files"
+            },
+            "title": {
+              "es": "Carpeta (Varios archivos):",
+              "en": "Folder (Multiple files):",
+              "pr": "Pasta (vários arquivos)"
+            },
+            "help": {
+              "es": "Para varios adjuntos, ingresar ruta a carpeta",
+              "en": "For several attachments, enter folder path",
+              "pr": "Para vários anexos, insira o caminho da pasta"
+            },
+            "id": "attached_folder",
+            "css": "col-md-12"
+          },
+          {
+            "type": "input",
+            "description": {
+              "es": "Permite adjuntar varios archivos indicando rutas manualmente",
+              "en": "It allows you to attach multiple files by manually specifying paths.",
+              "pr": "Permite anexar vários arquivos especificando os caminhos manualmente."
+            },
+            "placeholder": {
+              "es": "C:/tmp/a.pdf;C:/tmp/b.xlsx",
+              "en": "C:/tmp/a.pdf;C:/tmp/b.xlsx",
+              "pr": "C:/tmp/a.pdf;C:/tmp/b.xlsx"
+            },
+            "title": {
+              "es": "Lista de Archivos (opcional):",
+              "en": "File List (optional):",
+              "pr": "Lista de Arquivos (opcional):"
+            },
+            "help": {
+              "es": "Rutas separadas por ; , o salto de línea",
+              "en": "Paths separated by ; , or new line",
+              "pr": "Caminhos separados por ; , ou nova linha"
+            },
+            "id": "selected_files",
             "css": "col-md-12"
           }
         ]
@@ -1957,9 +2025,9 @@
               "pr": "Nome da sessão a ser usada"
             },
             "placeholder": {
-              "es": "session1",
+              "es": "sesion1",
               "en": "session1",
-              "pr": "session1"
+              "pr": "sessão1"
             },
             "title": {
               "es": "Sesión:",

@@ -22,7 +22,7 @@ To install the module in Rocketbot Studio, it can be done in two ways:
 Configure the mail server to be used
 
 2. Send Email  
-Send email, before you must configurate the server
+Send an email, you must first configure the server
 
 3. List all email  
 List all email, you can specify a filter
