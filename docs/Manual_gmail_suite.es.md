@@ -89,7 +89,7 @@ Configurar el servidor del mail que se va a usar
 |Credenciales|Ruta del archivo json descargado en el paso anterior|credentials.json|
 |Puerto (Opcional)||8080|
 |Usuario|Email que se usará para enviar correos. Puede estar en blanco si no enviarás emails.|user@example.com|
-|Sesión|Nombre de la sesión que le vamos a asignar|session1|
+|Sesión|Nombre de la sesión que le vamos a asignar|sesion1|
 |Asignar resultado a Variable|Resultado de la conexion|Variable|
 
 ### Enviar Email
@@ -97,14 +97,14 @@ Configurar el servidor del mail que se va a usar
 Envia un email, previamente debe configurar el servidor
 |Parámetros|Descripción|ejemplo|
 | --- | --- | --- |
-|Sesión|Nombre de la sesión que va a usar.|session1|
-|Para|Destinatarios del mensaje. Deben estar separados por coma|to@mail.com, to2@mail.com|
+|Sesión|Nombre de la sesión que va a usar.|sesion1|
+|Para|Destinatarios del mensaje. Deben estar separados por coma.|to@mail.com, to2@mail.com|
 |Copia|Destinatarios enviados por copia. Deben ir separados por coma|cc@mail.com, cc2@mail.com|
 |Copia Oculta|Destinatarios enviados por copia oculta. Deben ir separado por coma|bcc@mail.com, bcc2@mail.comn|
 |Asunto|Asunto del mensaje|Nuevo mail|
-|Mensaje|Cuerpo del mail. Se pueden usar etiquetas html|Hi from Rocketbot!|
+|Mensaje|Cuerpo del mail. Se pueden usar etiquetas html|Hola desde Rocketbot!|
 |Archivo Adjunto|Ruta del archivo que se desea adjuntar|C:\User\Desktop\test.txt|
-|Carpeta (Varios archivos)|Ruta de la carpeta con los archivos que se desea adjuntar|C:\User\Desktop\Files|
+|Carpeta (Varios archivos)|Ruta de la carpeta con los archivos que se desea adjuntar.|C:\User\Desktop\Files|
 |Asignar resultado a Variable|Resultado de la conexion|Variable|
 
 ### Lista todos los email
@@ -210,7 +210,7 @@ Este comando permite responder un email por su ID
 |Copia|Destinatarios enviados por copia. Deben estar separados por coma|cc@mail.com, cc2@mail.com|
 |Copia Oculta|Destinatarios enviados por copia oculta. Deben estar separados por coma|bcc@mail.com, bcc2@mail.com|
 |Asunto|Asunto del mensaje|Nuevo mail|
-|Mensaje|Cuerpo del mail.|Hi from Rocketbot!|
+|Mensaje|Cuerpo del mail.|Hola desde Rocketbot!|
 |Archivo Adjunto|Ruta del archivo que se desea adjuntar|C:\User\Desktop\test.txt|
 |Carpeta (Varios archivos)|Ruta de la carpeta con los archivos que se desea adjuntar|C:\User\Desktop\Files|
 |Lista de Archivos (opcional)|Permite adjuntar varios archivos indicando rutas manualmente|C:/tmp/a.pdf;C:/tmp/b.xlsx|
@@ -229,4 +229,4 @@ Descarga los archivos adjuntos de un correo y los guarda en una carpeta
 Cierra la conexión del servidor
 |Parámetros|Descripción|ejemplo|
 | --- | --- | --- |
-|Sesión|Nombre de la sesión que va a usar|session1|
+|Sesión|Nombre de la sesión que va a usar|sesion1|

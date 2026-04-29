@@ -89,22 +89,22 @@ Configure o servidor de email a ser usado
 |Credenciais|Caminho do arquivo json baixado na etapa anterior|credentials.json|
 |Porto (Opcional)||8080|
 |Usuário|E-mail que será usado para enviar e-mails. Pode ficar em branco se você não quiser enviar e-mail|user@example.com|
-|Sessão|Nome da sessão que vamos atribuir|session1|
-|Atribuir resultado à variável|Resultado da conexão|Variável|
+|Sessão|Nome da sessão que vamos atribuir|sessão1|
+|Atribuir resultado a uma variável|Resultado da conexão|Variável|
 
 ### Enviar Email
   
 Envia um email, você deve configurar previamente o servidor
 |Parâmetros|Descrição|exemplo|
 | --- | --- | --- |
-|Sessão|Nome da sessão a ser usada|session1|
-|Para|Destinatários da mensagem. Devem ser separados por vírgulas|to@mail.com, to2@mail.com|
+|Sessão|Nome da sessão a ser usada.|sessão1|
+|Para|Destinatários da mensagem. Devem ser separados por vírgulas.|to@mail.com, to2@mail.com|
 |Copia|Destinatários enviados por cópia. Devem ser separado por vírgula|cc@mail.com, cc2@mail.com|
 |Cópia oculta|Destinatários enviados por cópia oculta. Devem ser separado por vírgula|bcc@mail.com, bcc2@mail.com|
 |Assunto|Assunto da mensagem|Novo mail|
-|Mensagem|Corpo do e-mail. tags html podem ser usadas|Hi from Rocketbot!|
+|Mensagem|Corpo do e-mail. É possível usar tags HTML|Olá, da Rocketbot!|
 |Arquivo anexo|Caminho do arquivo a ser anexado|C:\User\Desktop\test.txt|
-|Pasta (vários arquivos)|Caminho da pasta com os arquivos a serem anexados|C:\User\Desktop\Files|
+|Pasta (vários arquivos)|Caminho para a pasta que contém os arquivos que você deseja anexar.|C:\User\Desktop\Files|
 |Atribuir resultado à variável|Resultado da conexão|Variável|
 
 ### Listar todos os e-mails
@@ -113,7 +113,7 @@ Liste todos os e-mails, você pode especificar um filtro
 |Parâmetros|Descrição|exemplo|
 | --- | --- | --- |
 |Filtro|Você pode usar todas as opções de filtro do Gmail.|subject:ESCOLA|
-|Número de e-mails a obter|Número de e-mails a obter, por padrão 100, máximo 500.|500|
+|Número de e-mails a obter|Número de e-mails obtidos, por defeito 100, máximo 500..|500|
 |Pasta|Pasta de onde todos os emails não estão listados|INBOX|
 |Organizar por|Classifique os emails listados pelo parâmetro desejado|New first|
 |ID do tópico|Verifique para obter o ID do tópico da mensagem|True|
@@ -210,10 +210,10 @@ Este comando permite responder um email por seu ID
 |Cópia|Destinatários enviados por cópia. Devem ser separados por vírgulas|cc@mail.com, cc2@mail.com|
 |Cópia oculta|Destinatários enviados por cópia oculta. Devem ser separados por vírgulas|bcc@mail.com, bcc2@mail.com|
 |Assunto|Assunto da mensagem|Novo email|
-|Mensagem|Corpo do e-mail.|Hi from Rocketbot!|
+|Mensagem|Corpo do e-mail.|Olá da Rocketbot!|
 |Arquivo anexo|Caminho do arquivo a ser anexado|C:\User\Desktop\test.txt|
 |Pasta (vários arquivos)|Caminho da pasta com os arquivos a serem anexados|C:\User\Desktop\Files|
-|Lista de Arquivos (opcional)|Permite anexar vários arquivos informando caminhos manualmente|C:/tmp/a.pdf;C:/tmp/b.xlsx|
+|Lista de Arquivos (opcional)|Permite anexar vários arquivos especificando os caminhos manualmente.|C:/tmp/a.pdf;C:/tmp/b.xlsx|
 
 ### Baixar anexos por ID
   
@@ -229,4 +229,4 @@ Baixe anexos de e-mail e salve-os em uma pasta
 Feche a conexão do servidor
 |Parâmetros|Descrição|exemplo|
 | --- | --- | --- |
-|Sessão|Nome da sessão a ser usada|session1|
+|Sessão|Nome da sessão a ser usada|sessão1|

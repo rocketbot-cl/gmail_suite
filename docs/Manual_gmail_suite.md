@@ -86,25 +86,25 @@ publish the app for google approval and you can use it indefinitely.
 Configure the mail server to be used
 |Parameters|Description|example|
 | --- | --- | --- |
-|Credentials|Path of the json file donwloaded in the previus step |credentials.json|
+|Credentials|Path to the JSON file downloaded in the previous step|credentials.json|
 |Port (Optional)||8080|
-|User|Email that will be used to send emails. It can be blank if you will not send emails|user@example.com|
-|Session|Name of the sesion we are going to asign|session1|
-|Assign result to a Variable|Result of the connection|Variable|
+|User|Email address that will be used to send emails. It can be left blank if you will not be sending emails.|user@example.com|
+|Session|Name of the session we are going to assign to you|session1|
+|Assign result to Variable|Connection result|Variable|
 
 ### Send Email
   
-Send email, before you must configurate the server
+Send an email, you must first configure the server
 |Parameters|Description|example|
 | --- | --- | --- |
-|Session|Name of the session we will be use|session1|
-|To|Message receivers. They must be separated by commas|to@mail.com, to2@mail.com|
+|Session|Name of the session you will use.|session1|
+|To|Message recipients. They must be separated by commas.|to@mail.com, to2@mail.com|
 |Cc|Receivers sent by copy. They must be separated by commas|cc@mail.com, cc2@mail.com|
 |Bcc|Receivers sent by copy hidden. They must be separated by commas|bcc@mail.com, bcc2@mail.com|
-|Subject|Message subject|New mail|
-|Body|Body of the message. Can be use html labels|Hi from Rocketbot!|
+|Subject|Subject of message|New mail|
+|Body|Email body. HTML tags can be used.|Hello from Rocketbot!|
 |Attached File|Path of the file that we want to attach|C:\User\Desktop\test.txt|
-|Folder (Multiple files)|Path of the folder with the files we want to attach|C:\User\Desktop\Files|
+|Folder (Multiple files)|Path to the folder containing the files you wish to attach.|C:\User\Desktop\Files|
 |Assign result to a Variable|Result of the connection|Variable|
 
 ### List all email
@@ -113,7 +113,7 @@ List all email, you can specify a filter
 |Parameters|Description|example|
 | --- | --- | --- |
 |Filter|You can use all options of filters from gmail|subject:SCHOOL|
-|Number of emails to retrieve|Number of emails to retrieve, default 100, maximum 500.|500|
+|Number of emails to obtain|Number of emails to be retrieved, by default 100, maximum 500.|500|
 |Folder|Folder where all emails are listed|INBOX|
 |Order by|Sort the listed emails by the desired parameter|New first|
 |Thread ID|Check to get message thread id|True|
@@ -213,7 +213,7 @@ This command allows you to reply to an email by its ID
 |Body|Body of the message. |Hi from Rocketbot!|
 |Attached File|Path of the file that we want to attach|C:\User\Desktop\test.txt|
 |Folder (Multiple files)|Path of the folder with the files we want to attach|C:\User\Desktop\Files|
-|File List (optional)|Attach multiple files by manually entering paths|C:/tmp/a.pdf;C:/tmp/b.xlsx|
+|File List (optional)|It allows you to attach multiple files by manually specifying paths.|C:/tmp/a.pdf;C:/tmp/b.xlsx|
 
 ### Download attachments for ID
   
